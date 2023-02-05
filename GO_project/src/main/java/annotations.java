@@ -1,4 +1,4 @@
-public class Annotations {
+public class annotations {
     private String gene_symbol;
     private String go_class_accession;
     private String organism;

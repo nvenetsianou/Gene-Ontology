@@ -1,4 +1,4 @@
-public class GO_class {
+public class go_class {
     private String accession;
     private String definition;
     private String ontology_source;
@@ -47,8 +47,8 @@ public class main() {
     GO_class go_class = new GO_class();
     GO_classDAO go_classDAO = new GO_classDAO();
     GO_classDAO.save(go_class) //insert
-    GO_classDAO.update(go_class) //update
-    GO_classDAO.delete(go_class) //delete
+            GO_classDAO.update(go_class) //update
+            GO_classDAO.delete(go_class) //delete
 }
 
 public class GO_classController() {

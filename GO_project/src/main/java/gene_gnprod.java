@@ -1,4 +1,4 @@
-public class Gene_gnprod {
+public class gene_gnprod {
     private String symbol;
     private String name;
     private String organism;
