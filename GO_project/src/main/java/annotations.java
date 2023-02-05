@@ -64,5 +64,5 @@ public class annotations {
     }
 
     @ManytoMany
-    private List<GO_class> goClassList
+    private List<go_class> goClassList;
 }

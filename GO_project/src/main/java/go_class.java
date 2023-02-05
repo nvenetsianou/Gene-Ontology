@@ -28,38 +28,39 @@ public class go_class {
     }
 }
 
-public class GO_classDAO {
-    public List<GO_class> getAllGOclasses {
-        database....select * from GO_class;
+public class go_classDAO {
+    public List<go_class> getAllGOclasses {
+        database....select * from go_class;
     }
 
-    public GO_class getGOclass(accession) {
-        database....select * where GO_class.accession==accession;
+    public go_class getGOclass(accession) {
+        database....select * where go_class.accession==accession;
     }
 
-    public GO_class updateGO_class(GO_class) {
-        database....update where GO_class.accession==accession;
+    public go_class updateGO_class(GO_class) {
+        database....update where go_class.accession==accession;
     }
 
 }
 
 public class main() {
-    GO_class go_class = new GO_class();
-    GO_classDAO go_classDAO = new GO_classDAO();
-    GO_classDAO.save(go_class) //insert
-            GO_classDAO.update(go_class) //update
-            GO_classDAO.delete(go_class) //delete
+    go_class go_class = new go_class();
+    go_classDAO go_classDAO = new go_classDAO();
+    go_classDAO.save(go_class) //insert
+            go_classDAO.update(go_class) //update
+            go_classDAO.delete(go_class) //delete
 }
 
-public class GO_classController() {
+public class go_classController() {
     @GetMapping("/getAllGOclasses")
-    public List<GO_class> getAllGOclasses() {
-        return GO_classDAO.getAllGOclasses;
+    public List<go_class> getAllGOclasses() {
+        return go_classDAO.getAllGOclasses;
     }
 
     @GetMapping("/getGOclass?id=")
-    public GO_class GO_classDAO(accession) {
-        return GO_classDAO.GO_classDAO(accession);
+    public go_class go_classDAO(accession) {
+        return go_classDAO.getGOclass(accession);
+
     }
 
 }
