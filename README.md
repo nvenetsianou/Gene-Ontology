@@ -1,1 +1,1 @@
-# Gene-Ontelogy
+# Gene-Ontology
