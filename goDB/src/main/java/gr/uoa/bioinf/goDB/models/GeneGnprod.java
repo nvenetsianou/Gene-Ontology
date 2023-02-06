@@ -1,10 +1,27 @@
-public class gene_gnprod {
+package gr.uoa.bioinf.goDB.models;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class GeneGnprod {
+    @Id
+    @Column(name="Symbol")
     private String symbol;
+    @Column(name="Name")
     private String name;
+    @Column(name="Organism")
     private String organism;
+    @Column(name="gType")
     private String gtype;
+    @Column(name="Source")
     private String source;
+    @Column(name="Synonyms")
     private String synonyms;
+
+    public GeneGnprod() {
+    }
 
     public String getSymbol() {
         return symbol;
@@ -53,4 +70,5 @@ public class gene_gnprod {
     public void setSynonyms(String synonyms) {
         this.synonyms = synonyms;
     }
+
 }

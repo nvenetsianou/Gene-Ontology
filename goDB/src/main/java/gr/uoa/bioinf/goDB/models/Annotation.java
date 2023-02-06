@@ -1,11 +1,36 @@
-public class annotations {
+package gr.uoa.bioinf.goDB.models;
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
+@IdClass(GeneGnprodGoClassPK.class)
+public class Annotation {
+
+    @Id
+    @Column(name="Gene_Symbol")
     private String gene_symbol;
+    @Id
+    @Column(name="GO_class_Accession")
     private String go_class_accession;
+    @Column(name="Organism")
     private String organism;
+    @Column(name="Annotation_qualifier")
     private String annotation_qualifier;
+    @Column(name="Annotation_extension")
     private String annotation_extension;
+    @Column(name="Evidence")
     private String evidence;
+    @Column(name="Reference")
     private String reference;
+
+    @ManyToMany
+    private List<GoClass> goClassList;
+
+    @ManyToMany
+    private List<GeneGnprod> geneGnLrodList;
+
+    public Annotation() {
+    }
 
     public String getGene_symbol() {
         return gene_symbol;
@@ -63,6 +88,4 @@ public class annotations {
         this.reference = reference;
     }
 
-    @ManytoMany
-    private List<go_class> goClassList;
 }
