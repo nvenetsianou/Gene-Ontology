@@ -13,7 +13,25 @@ public class GeneGnprodDao {
         // database...select * where GeneGnprod.symbol == symbol;
     }
 
-    public List<GeneGnprod> updateGeneGnprod() {
+    public List<GeneGnprod> updateGeneGnprod(String symbol) {
         // database....update where where GeneGnprod.symbol == symbol;
     }
+
+    public List<GeneGnprod> findByOrganism(String organism) {
+        // database ... select * where GeneGnprod.organism == organism;
+    }
+
+    public  List<GeneGnprod> findByName(String name) {
+        // database ... select * from where GeneGnprod.name == (or LIKE) name;
+    }
+
+    public List<GeneGnprod> getSynonyms(String synonyms) {
+        // database... select * from where GeneGnprod.synonyms == synonyms;
+    }
+
+    public List<GeneGnprod> finfByGeneType(String gene_type){
+        // database... select * from where GeneGnprod.gene_type == gene_type;
+    }
+
+    
 }

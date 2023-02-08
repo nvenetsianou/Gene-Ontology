@@ -10,10 +10,18 @@ public class GoClassDao {
     }
 
     public List<GoClass> getOneClass {
-        // database...select * where go_class.accession==accession;
+        // database...select * where GoClass.accession == accession;
     }
 
-    public List<GoClass> updateGoClass() {
-        // database....update where go_class.accession==accession;
+    public List<GoClass> updateGoClass {
+        // database....update where GoClass.accession == accession;
+    }
+
+    public List<GoClass> findByOntologySource(String ontology_source) {
+        // database... select * where GoClass.ontology_source == ontology_source;
+    }
+
+    public List<GoClass> getDefinition(String definition) {
+        // database... select * where GoClass.definition LIKE "..";
     }
 }
