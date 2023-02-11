@@ -2,47 +2,71 @@ package gr.uoa.bioinf.goDB.daos;
 
 
 import gr.uoa.bioinf.goDB.models.Annotation;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 // afti i klasi sindeetai me ti vasi
 public class AnnotationDao {
+    @PersistenceContext
+    private EntityManager entityManager;
 
     //getAllAnnotations, findAllAnnotations
     //getOne, findone
-
-
-    //findByOrganism
-    public List<Annotation> findByOrganism(String organism) {
-        // select * from annotation where annotation.organism = organism
+    public List getAllAnnotation() {
+        Query query = entityManager.createQuery("select a from Annotation a");
+        return query.getResultList();
     }
 
-    public List<Annotation> findBySymbol(String symbol) {
-        // select * from annotation where annotation.symbol == symbol;
+    public List getAnnotationByGeneSymbol() {
+        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.gene_symbol=:gene_symbol");
+        return query.getResultList();
     }
 
-    public List<Annotation> findByOrganismAndSymbol(String Organism, String symbol) {
-        // select * from annotation where annotation.organism == organism and annotation.symbol == symbol;
+    public List getAnnotationByGoClassAccession() {
+        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.go_class_accession=:go_class_accession");
+        return query.getResultList();
     }
 
-    public List<Annotation> findByGoClassAccession(String go_class_accession) {
-        // select * from annotation where annotation.go_class_accession == go_class_accession;
+    public List findByOrganism() {
+        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.organism=:organism");
+        return query.getResultList();
     }
 
-    public List<Annotation> findByAnnotationExtension(String annotation_extension) {
-        // select * from annotation where annotation.annotation_extension == annotation_extension;
+    public List findByOrganismAndSymbol() {
+        Query query =  entityManager.createQuery("select a from Annotation a where " +
+                "Annotation.organism=:organism and Annotation.gene_symbol=:gene_symbol");
+        return query.getResultList();
     }
 
-    public List<Annotation> findByAnnotationQualifier(String annotation_qualifier) {
-        // select * from annotation where annotation.annotation_qualifier == annotation_qualifier;
+    public List findByOrganismAndAccession() {
+        Query query =  entityManager.createQuery("select a from Annotation a where " +
+                "Annotation.organism=:organism and Annotation.go_class_accession=:go_class_accession");
+        return query.getResultList();
+    }
+    // tha einai typoy epilegw gene -> show annotation -> epilogh extension
+    public List findByAnnotationExtension() {
+        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.annotation_extension=:extension");
+        return query.getResultList();
     }
 
-    public List<Annotation> findByEvidence(String evidence) {
-        // select * from annotation where annotation.evidence == evidence;
+    public List findByAnnotationQualifier() {
+        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.annotation_qualifier=:annotation_qualifier");
+        return query.getResultList();
     }
 
-    public  List<Annotation> findByReference(String reference) {
-        // select * from annotation where annotation.reference == reference;
+    public List findByEvidence() {
+        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.evidence=:evidence");
+        return query.getResultList();
+    }
+
+    public  List findByReference() {
+        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.evidence=:evidence");
+        return query.getResultList();
     }
 
 }

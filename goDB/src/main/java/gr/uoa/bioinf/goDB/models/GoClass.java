@@ -3,8 +3,10 @@ package gr.uoa.bioinf.goDB.models;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="GO_class")
 public class GoClass {
     @Id
     @Column(name="Accession")
@@ -40,10 +42,6 @@ public class GoClass {
     public void setOntology_source(String ontology_source) {
         this.ontology_source = ontology_source;
     }
-}
-
-
-
 }
 
 //public class main() { //TODO

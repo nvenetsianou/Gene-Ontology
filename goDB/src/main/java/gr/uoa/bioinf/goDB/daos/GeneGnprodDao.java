@@ -1,37 +1,54 @@
 package gr.uoa.bioinf.goDB.daos;
 import gr.uoa.bioinf.goDB.models.GeneGnprod;
 import gr.uoa.bioinf.goDB.models.GoClass;
-
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
+@Repository
 public class GeneGnprodDao {
-    public List<GeneGnprod> getAllGeneGnprod {
-        // database....select * from gene_gnprod;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public List getAllGeneGnprod() {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr");
+        return query.getResultList();
     }
 
-    public List<GeneGnprod> getOneGeneGnprod {
-        // database...select * where GeneGnprod.symbol == symbol;
+    public List getOneGeneGnprod() {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.symbol=:symbol");
+        return query.getResultList();
     }
 
+    /* not sure
     public List<GeneGnprod> updateGeneGnprod(String symbol) {
         // database....update where where GeneGnprod.symbol == symbol;
+        return null;
+    } */
+
+    public List findByOrganism() {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.organism=:organism");
+        return query.getResultList();
     }
 
-    public List<GeneGnprod> findByOrganism(String organism) {
-        // database ... select * where GeneGnprod.organism == organism;
+    public  List findByName() {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.name=:name");
+        return query.getResultList();
     }
 
-    public  List<GeneGnprod> findByName(String name) {
-        // database ... select * from where GeneGnprod.name == (or LIKE) name;
+    // not sure -> mporei na gyrnaei apla ta synonyms
+    public List getSynonyms() {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.synonyms=:synonyms");
+        return query.getResultList();
     }
 
-    public List<GeneGnprod> getSynonyms(String synonyms) {
-        // database... select * from where GeneGnprod.synonyms == synonyms;
+    public List findByGeneType(){
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.gtype=:gtype");
+        return query.getResultList();
     }
 
-    public List<GeneGnprod> finfByGeneType(String gene_type){
-        // database... select * from where GeneGnprod.gene_type == gene_type;
-    }
 
-    
 }

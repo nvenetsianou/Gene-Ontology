@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="Annotations")
 @IdClass(GeneGnprodGoClassPK.class)
 public class Annotation {
 
