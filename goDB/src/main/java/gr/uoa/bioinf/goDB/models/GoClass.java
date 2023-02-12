@@ -14,9 +14,15 @@ public class GoClass {
     @Column(name="Definition")
     private String definition;
     @Column(name="Ontology_source")
-    private String ontology_source;
+    private String ontologySource;
 
     public GoClass() {
+    }
+
+    public GoClass(String accession, String definition, String ontologySource) {
+        this.accession = accession;
+        this.definition = definition;
+        this.ontologySource = ontologySource;
     }
 
     public String getAccession() {
@@ -35,12 +41,12 @@ public class GoClass {
         this.definition = definition;
     }
 
-    public String getOntology_source() {
-        return ontology_source;
+    public String getOntologySource() {
+        return ontologySource;
     }
 
-    public void setOntology_source(String ontology_source) {
-        this.ontology_source = ontology_source;
+    public void setOntologySource(String ontologySource) {
+        this.ontologySource = ontologySource;
     }
 }
 

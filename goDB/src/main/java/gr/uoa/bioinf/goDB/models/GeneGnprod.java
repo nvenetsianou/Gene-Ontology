@@ -16,7 +16,7 @@ public class GeneGnprod {
     @Column(name="Organism")
     private String organism;
     @Column(name="gType")
-    private String gtype;
+    private String gType;
     @Column(name="Source")
     private String source;
     @Column(name="Synonyms")
@@ -49,12 +49,12 @@ public class GeneGnprod {
         this.organism = organism;
     }
 
-    public String getGtype() {
-        return gtype;
+    public String getgType() {
+        return gType;
     }
 
-    public void setGtype(String gtype) {
-        this.gtype = gtype;
+    public void setgType(String gType) {
+        this.gType = gType;
     }
 
     public String getSource() {

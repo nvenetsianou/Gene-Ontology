@@ -22,50 +22,58 @@ public class AnnotationDao {
         return query.getResultList();
     }
 
-    public List getAnnotationByGeneSymbol() {
-        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.gene_symbol=:gene_symbol");
+    public List getAnnotationByGeneSymbol(String geneSymbol) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.geneSymbol=:geneSymbol");
+        query.setParameter("geneSymbol", geneSymbol);
         return query.getResultList();
     }
 
-    public List getAnnotationByGoClassAccession() {
-        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.go_class_accession=:go_class_accession");
+    public List getAnnotationByGoClassAccession(String goClassAccession) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.goClassAccession=:goClassAccession");
+        query.setParameter("goClassAccession", goClassAccession);
         return query.getResultList();
     }
 
-    public List findByOrganism() {
-        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.organism=:organism");
+    public List findByOrganism(String organism) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.organism=:organism");
+        query.setParameter("organism", organism);
         return query.getResultList();
     }
-
-    public List findByOrganismAndSymbol() {
+    // check this
+    public List findByOrganismAndSymbol(String organismAndSymbol) {
         Query query =  entityManager.createQuery("select a from Annotation a where " +
-                "Annotation.organism=:organism and Annotation.gene_symbol=:gene_symbol");
+                "a.organism=:organism and a.geneSymbol=:geneSymbol");
+        query.setParameter("organismAndSymbol", organismAndSymbol);
         return query.getResultList();
     }
-
-    public List findByOrganismAndAccession() {
+    // check this
+    public List findByOrganismAndAccession(String organismAndAccession) {
         Query query =  entityManager.createQuery("select a from Annotation a where " +
-                "Annotation.organism=:organism and Annotation.go_class_accession=:go_class_accession");
+                "a.organism=:organism and a.goClassAccession=:goClassAccession");
+        query.setParameter("organismAndAccession", organismAndAccession);
         return query.getResultList();
     }
     // tha einai typoy epilegw gene -> show annotation -> epilogh extension
-    public List findByAnnotationExtension() {
-        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.annotation_extension=:extension");
+    public List findByAnnotationExtension(String annotationExtension) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.annotationExtension=:extension");
         return query.getResultList();
     }
 
-    public List findByAnnotationQualifier() {
-        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.annotation_qualifier=:annotation_qualifier");
+    public List findByAnnotationQualifier(String annotationQualifier) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.annotationQualifier=:annotationQualifier");
+        query.setParameter("annotationQualifier", annotationQualifier);
         return query.getResultList();
     }
 
-    public List findByEvidence() {
-        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.evidence=:evidence");
+    public List findByEvidence(String evidence) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.evidence=:evidence");
+        query.setParameter("evidence", evidence);
         return query.getResultList();
     }
 
-    public  List findByReference() {
-        Query query =  entityManager.createQuery("select a from Annotation a where Annotation.evidence=:evidence");
+    public  List findByReference(String reference) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.reference=:reference");
+        query.setParameter("reference",reference);
         return query.getResultList();
     }
 

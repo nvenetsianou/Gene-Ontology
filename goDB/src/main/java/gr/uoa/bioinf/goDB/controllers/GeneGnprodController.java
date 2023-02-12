@@ -6,6 +6,7 @@ import gr.uoa.bioinf.goDB.models.GoClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,34 +24,34 @@ public class GeneGnprodController {
         return GeneGnprodDao.getAllGeneGnprod();
     }
 
-    @GetMapping("/?geneGnprod=")
+    @GetMapping("/symbol/{symbol}")
     @ResponseBody
-    public List<GeneGnprod> getOneGeneGnprod() {
-        return GeneGnprodDao.getOneGeneGnprod();
+    public List<GeneGnprod> getOneGeneGnprod(@PathVariable String symbol) {
+        return GeneGnprodDao.getOneGeneGnprod(symbol);
     }
 
-    @GetMapping("/?organism=")
+    @GetMapping("/organism/{organism}")
     @ResponseBody
-    public List<GeneGnprod> findByOrganism() {
-        return GeneGnprodDao.findByOrganism();
+    public List<GeneGnprod> findByOrganism(@PathVariable String organism) {
+        return GeneGnprodDao.findByOrganism(organism);
     }
 
-    @GetMapping("/?name=")
+    @GetMapping("/name/{name}")
     @ResponseBody
-    public List<GeneGnprod> findByName() {
-        return GeneGnprodDao.findByName();
+    public List<GeneGnprod> findByName(@PathVariable String name) {
+        return GeneGnprodDao.findByName(name);
     }
 
-    @GetMapping("/?synonyms=")
+    @GetMapping("/synonyms/{synonyms}")
     @ResponseBody
-    public List<GeneGnprod> getSynonyms() {
-        return GeneGnprodDao.getSynonyms();
+    public List<GeneGnprod> getSynonyms(@PathVariable String synonyms) {
+        return GeneGnprodDao.getSynonyms(synonyms);
     }
 
-    @GetMapping("/?gene_type=")
+    @GetMapping("/gType/{gType}")
     @ResponseBody
-    public List<GeneGnprod> findByGeneType() {
-        return GeneGnprodDao.findByGeneType();
+    public List<GeneGnprod> findByGeneType(@PathVariable String gType) {
+        return GeneGnprodDao.findByGeneType(gType);
     }
 
 }

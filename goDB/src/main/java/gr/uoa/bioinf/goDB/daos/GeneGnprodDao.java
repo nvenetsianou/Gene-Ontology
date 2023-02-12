@@ -18,8 +18,9 @@ public class GeneGnprodDao {
         return query.getResultList();
     }
 
-    public List getOneGeneGnprod() {
-        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.symbol=:symbol");
+    public List getOneGeneGnprod(String symbol) {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where gnpr.symbol=:symbol");
+        query.setParameter("symbol", symbol);
         return query.getResultList();
     }
 
@@ -29,24 +30,28 @@ public class GeneGnprodDao {
         return null;
     } */
 
-    public List findByOrganism() {
-        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.organism=:organism");
+    public List findByOrganism(String organism) {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where gnpr.organism=:organism");
+        query.setParameter("organism", organism);
         return query.getResultList();
     }
 
-    public  List findByName() {
-        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.name=:name");
+    public  List findByName(String name) {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where gnpr.name=:name");
+        query.setParameter("name", name);
         return query.getResultList();
     }
 
     // not sure -> mporei na gyrnaei apla ta synonyms
-    public List getSynonyms() {
-        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.synonyms=:synonyms");
+    public List getSynonyms(String synonyms) {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where gnpr.synonyms=:synonyms");
+        query.setParameter("synonyms", synonyms);
         return query.getResultList();
     }
 
-    public List findByGeneType(){
-        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where GeneGnprod.gtype=:gtype");
+    public List findByGeneType(String gType) {
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where gnpr.gType=:gtype");
+        query.setParameter("gType", gType);
         return query.getResultList();
     }
 

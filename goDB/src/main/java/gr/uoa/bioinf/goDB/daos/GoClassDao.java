@@ -4,11 +4,12 @@ import gr.uoa.bioinf.goDB.models.GoClass;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Component
 public class GoClassDao {
 
     @PersistenceContext
@@ -19,8 +20,9 @@ public class GoClassDao {
         return query.getResultList();
     }
 
-    public List getOneClass() {
-        Query query =  entityManager.createQuery("select g from GoClass g where GoClass.accession=:accession");
+    public List getOneClass(String accession) {
+        Query query =  entityManager.createQuery("select g from GoClass g where g.accession=:accession");
+        query.setParameter("accession", accession);
         return query.getResultList();
     }
 
@@ -30,13 +32,14 @@ public class GoClassDao {
         return null;
     }*/
 
-    public List findByOntologySource() {
-        Query query = entityManager.createQuery("select g from GoClass g where GoClass.ontology_source=:ontology_source");
+    public List findByOntologySource(String ontologySource) {
+        Query query = entityManager.createQuery("select g from GoClass g where g.ontologySource=:ontologySource");
+        query.setParameter("ontologySource", ontologySource);
         return query.getResultList();
     }
 
-    public List getDefinition() {
-        Query query = entityManager.createQuery("select g from GoClass g where GoClass.definition like 'input_user'");
+    public List getDefinition(String definition) {
+        Query query = entityManager.createQuery("select g from GoClass g where g.definition like 'input_user'");
         return query.getResultList();
     }
 }

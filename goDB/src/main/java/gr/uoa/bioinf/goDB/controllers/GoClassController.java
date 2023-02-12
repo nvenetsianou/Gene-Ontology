@@ -5,6 +5,7 @@ import gr.uoa.bioinf.goDB.models.GoClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,31 +20,27 @@ public class GoClassController {
 
     @GetMapping("/")
     @ResponseBody
-    public List<GoClass> getAllGOclasses() {
+    public List getAllGOclasses() {
         return goClassDao.getAll();
     }
 
-    @GetMapping("/?goClass=")
+    @GetMapping("/accession/{accession}")
     @ResponseBody
-    public List<GoClass> getOneClass() {
-        return goClassDao.getOneClass();
+    public List getOneClass(@PathVariable String accession) {
+        return goClassDao.getOneClass(accession);
     }
 
-    @GetMapping("?ontologySource=")
+    @GetMapping("/ontologySource/{ontologySource}")
     @ResponseBody
-    public List<GoClass> findByOntologySource() {
-       return goClassDao.findByOntologySource();
+    public List findByOntologySource(@PathVariable String ontologySource) {
+       return goClassDao.findByOntologySource(ontologySource);
     }
 
-    @GetMapping("?definition=")
+    @GetMapping("/definition/{definition}")
     @ResponseBody
-    public List<GoClass> getDefinition() {
-        return goClassDao.getDefinition();
+    public List<GoClass> getDefinition(@PathVariable String definition) {
+        return goClassDao.getDefinition(definition);
     }
 
-    /*
-    @GetMapping("/{id}}") {
 
-    }*/
-    // TODO
 }
