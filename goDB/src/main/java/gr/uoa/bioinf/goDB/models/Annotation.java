@@ -24,10 +24,10 @@ public class Annotation {
     @Column(name="Reference")
     private String reference;
 
-    @ManyToMany
+    @OneToMany
     private List<GoClass> goClassList;
 
-    @ManyToMany
+    @OneToMany
     private List<GeneGnprod> geneGnLrodList;
 
     public Annotation() {

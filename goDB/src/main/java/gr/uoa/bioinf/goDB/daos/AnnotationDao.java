@@ -40,17 +40,19 @@ public class AnnotationDao {
         return query.getResultList();
     }
     // check this
-    public List findByOrganismAndSymbol(String organismAndSymbol) {
+    public List findByOrganismAndSymbol(String organism, String symbol) {
         Query query =  entityManager.createQuery("select a from Annotation a where " +
-                "a.organism=:organism and a.geneSymbol=:geneSymbol");
-        query.setParameter("organismAndSymbol", organismAndSymbol);
+                "a.organism=:organism and a.geneSymbol=:symbol");
+        query.setParameter("organism", organism);
+        query.setParameter("symbol", symbol);
         return query.getResultList();
     }
     // check this
-    public List findByOrganismAndAccession(String organismAndAccession) {
+    public List findByOrganismAndAccession(String organism, String accession) {
         Query query =  entityManager.createQuery("select a from Annotation a where " +
                 "a.organism=:organism and a.goClassAccession=:goClassAccession");
-        query.setParameter("organismAndAccession", organismAndAccession);
+        query.setParameter("organism", organism);
+        query.setParameter("accession", accession);
         return query.getResultList();
     }
     // tha einai typoy epilegw gene -> show annotation -> epilogh extension

@@ -42,9 +42,8 @@ public class GeneGnprodDao {
         return query.getResultList();
     }
 
-    // not sure -> mporei na gyrnaei apla ta synonyms
     public List getSynonyms(String synonyms) {
-        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where gnpr.synonyms=:synonyms");
+        Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr where gnpr.synonyms like synonyms");
         query.setParameter("synonyms", synonyms);
         return query.getResultList();
     }
