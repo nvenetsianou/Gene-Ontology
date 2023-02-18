@@ -15,6 +15,27 @@ public class AnnotationDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+    // genesymbol, name
+    // organism,
+    public List getBySymbolOrName(String term) {
+        term = "%" + term + "%";
+        Query query =  entityManager.createQuery("select a from Annotation a where a.geneSymbol like :term or a.geneGnprod.name like :term");
+        query.setParameter("term", term);
+        return query.getResultList();
+    }
+
+    // goclassaccession, definition,
+    // ontology source
+    public List getByAccessionOrDefinition(String term) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.goClassAccession like :term or a.goClass.definition like :term");
+        query.setParameter("term", term);
+        return query.getResultList();
+    }
+
+
+    ///
+
     //getAllAnnotations, findAllAnnotations
     //getOne, findone
     public List getAllAnnotation() {

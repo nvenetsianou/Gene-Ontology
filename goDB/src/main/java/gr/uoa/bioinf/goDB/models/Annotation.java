@@ -8,10 +8,10 @@ import java.util.List;
 public class Annotation {
 
     @Id
-    @Column(name="Gene_Symbol")
+    @Column(name="Gene_Symbol", insertable=false, updatable=false)
     private String geneSymbol;
     @Id
-    @Column(name="GO_class_Accession")
+    @Column(name="GO_class_Accession", insertable=false, updatable=false)
     private String goClassAccession;
     @Column(name="Organism")
     private String organism;
@@ -24,11 +24,13 @@ public class Annotation {
     @Column(name="Reference")
     private String reference;
 
-    @OneToMany
-    private List<GoClass> goClassList;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "GO_class_Accession", referencedColumnName = "Accession")
+    private GoClass goClass;
 
-    @OneToMany
-    private List<GeneGnprod> geneGnLrodList;
+    @OneToOne
+    @JoinColumn(name = "Gene_Symbol", referencedColumnName = "Symbol")
+    private GeneGnprod geneGnprod;
 
     public Annotation() {
     }
@@ -89,4 +91,19 @@ public class Annotation {
         this.reference = reference;
     }
 
+    public GoClass getGoClass() {
+        return goClass;
+    }
+
+    public void setGoClass(GoClass goClass) {
+        this.goClass = goClass;
+    }
+
+    public GeneGnprod getGeneGnprod() {
+        return geneGnprod;
+    }
+
+    public void setGeneGnprod(GeneGnprod geneGnprod) {
+        this.geneGnprod = geneGnprod;
+    }
 }

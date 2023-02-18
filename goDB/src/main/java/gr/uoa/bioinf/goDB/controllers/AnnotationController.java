@@ -1,8 +1,11 @@
 package gr.uoa.bioinf.goDB.controllers;
 
 import gr.uoa.bioinf.goDB.daos.AnnotationDao;
+import gr.uoa.bioinf.goDB.models.SearchObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +15,33 @@ import java.util.List;
 public class AnnotationController {
     @Autowired
     AnnotationDao annotationDao;
+
+
+
+    @GetMapping("/geneSearch")
+    public String geneSearch(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
+                         BindingResult result) {
+        if (searchObject.getTerm() != null) {
+            model.addAttribute("results", annotationDao.getBySymbolOrName(searchObject.getTerm()));
+        } else {
+            model.addAttribute("results", null);
+        }
+        return "geneSearch";
+    }
+
+    @GetMapping("/goClassSearch")
+    public String goClassSearch(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
+                         BindingResult result) {
+        if (searchObject.getTerm() != null) {
+            model.addAttribute("results", annotationDao.getByAccessionOrDefinition(searchObject.getTerm()));
+        } else {
+            model.addAttribute("results", null);
+        }
+        return "goClassSearch";
+    }
+
+
+    ///
 
     @GetMapping("/")
     @ResponseBody

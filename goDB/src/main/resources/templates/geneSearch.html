@@ -1,0 +1,35 @@
+
+<form th:action="@{/geneGnprod/search}" th:object="${searchObject}" method="get">
+    <div class="row m-b">
+        <div class="col-sm-6">
+            Search by Gene Symbol OR Name: <input id="filter" type="text" th:field="*{term}" class="form-control input-sm w-auto inline m-r"/>
+            <button>search</button>
+        </div>
+    </div>
+</form>
+
+
+<div th:switch="${geneResults}">
+    <h2 th:case="null">No genes</h2>
+    <div th:case="*">
+        <h2>genes</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>symbol</th>
+                <th>Name</th>
+                <th>goClassAccession</th>
+                <th>organism</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="gene : ${geneResults}">
+                <td th:text="${gene.symbol}"></td>
+                <td th:text="${gene.name}"></td>
+                <td th:text="${gene.annotation.goClassAccession}"></td>
+                <td th:text="${gene.organism}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

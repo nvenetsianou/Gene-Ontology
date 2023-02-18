@@ -1,0 +1,33 @@
+
+<form th:action="@{/goClass/search}" th:object="${searchObject}" method="get">
+  <div class="row m-b">
+    <div class="col-sm-6">
+      Search by GO Class Accession OR Definition: <input id="filter" type="text" th:field="*{term}" class="form-control input-sm w-auto inline m-r"/>
+      <button>search</button>
+    </div>
+  </div>
+</form>
+
+
+<div th:switch="${goClassResults}">
+  <h2 th:case="null">No GO classes</h2>
+  <div th:case="*">
+    <h2>goClasses</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>accession</th>
+        <th>definition</th>
+        <th>organism</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="goClass : ${goClassResults}">
+        <td th:text="${goClass.accession}"></td>
+        <td th:text="${goClass.definition}"></td>
+        <td th:text="${goClass.organism}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
