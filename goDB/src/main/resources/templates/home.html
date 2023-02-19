@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -23,102 +24,42 @@
         <div class="sidebar-header">
             <h3>Gene Ontology</h3>
         </div>
-        <!--div sec:authorize="isAuthenticated()">
-            This content is only shown to authenticated users.
-        </div>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form-->
         <ul class="list-unstyled components">
             <p>GO Web App</p>
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="#">Gene Search</a>
-                    </li>
-                    <li>
-                        <a href="#">GO Class Search</a>
-                    </li>
-                </ul>
+            <li>
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/geneGnprod/search}">Gene Search</a>
+                <a th:href="@{/goClass/search}">GO Class Search</a>
             </li>
         </ul>
+        <br/>
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+        <form th:action="@{/login}" method="post">
+            <input type="submit" value="Login" class="btn btn-light text-center"/>
+        </form>
     </nav>
     <!-- Page Content Holder -->
     <div id="content">
+    <h2>Hello</h2>
+
+        ....
 
 
-        <form th:action="@{/home}" th:object="${searchObject}" method="get">
-            <div class="row m-b">
-                <div class="col-sm-6">
-                    Search by Gene Symbol OR Name: <input id="filter" type="text" th:field="*{term}" class="form-control input-sm w-auto inline m-r"/>
-                    <button>search</button>
-                </div>
-            </div>
-        </form>
 
-
-        <div th:switch="${results}">
-            <h2 th:case="null">No genes</h2>
-            <div th:case="*">
-                <h2>genes</h2>
-                <table  class="table">
-                    <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>Name</th>
-                        <th>Go Class Accession</th>
-                        <th>Organism</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="result : ${results}">
-                        <td th:text="${result.geneSymbol}"></td>
-                        <td th:text="${result.geneGnprod.name}"></td>
-                        <td th:text="${result.goClassAccession}"></td>
-                        <td th:text="${result.organism}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <p>Spring Security Thymeleaf tutorial</p>
+        <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+        <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+        <div sec:authorize="isAuthenticated()">
+            Text visible only to authenticated users.
         </div>
+        Authenticated username:
+        <div sec:authentication="name"></div>
+    </div>
 
-
-        <form th:action="@{/home}" th:object="${searchObject}" method="get">
-            <div class="row m-b">
-                <div class="col-sm-6">
-                    Search by GO Class Accession OR Definition: <input id="filter" type="text" th:field="*{term}" class="form-control input-sm w-auto inline m-r"/>
-                    <button>search</button>
-                </div>
-            </div>
-        </form>
-
-        <div th:switch="${results}">
-            <h2 th:case="null">No GO classes</h2>
-            <div th:case="*">
-                <h2>goClasses</h2>
-                <table  class="table">
-                    <thead>
-                    <tr>
-                        <th>Accession</th>
-                        <th>Definition</th>
-                        <th>Organism</th>
-                        <th>Ontology Source</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="result : ${results}">
-                        <td th:text="${result.goClassAccession}"></td>
-                        <td th:text="${result.goClass.definition}"></td>
-                        <td th:text="${result.organism}"></td>
-                        <td th:text="${result.goClass.ontologySource}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-           </div>
 </div>
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->

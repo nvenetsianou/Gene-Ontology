@@ -1,13 +1,14 @@
 package gr.uoa.bioinf.goDB.controllers;
 
+import gr.uoa.bioinf.goDB.daos.AnnotationDao;
 import gr.uoa.bioinf.goDB.daos.GoClassDao;
 import gr.uoa.bioinf.goDB.models.GoClass;
+import gr.uoa.bioinf.goDB.models.SearchObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +17,22 @@ import java.util.List;
 public class GoClassController {
 
     @Autowired
+    AnnotationDao annotationDao;
+
+    @Autowired
     GoClassDao goClassDao;
+
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
+                                BindingResult result) {
+        model.addAttribute("organisms", annotationDao.getOrganisms());
+        if (searchObject.getTerm() != null) {
+            model.addAttribute("results", annotationDao.searchGoClasses(searchObject));
+        } else {
+            model.addAttribute("results", null);
+        }
+        return "goClassSearch";
+    }
 
     @GetMapping("/")
     @ResponseBody

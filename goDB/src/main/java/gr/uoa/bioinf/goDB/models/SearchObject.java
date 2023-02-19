@@ -5,6 +5,7 @@ public class SearchObject {
     private String term;
     private String organism;
     private String goClass;
+    private String ontologySource;
 
     public String getTerm() {
         return term;
@@ -28,5 +29,13 @@ public class SearchObject {
 
     public void setGoClass(String goClass) {
         this.goClass = goClass;
+    }
+
+    public String getOntologySource() {
+        return ontologySource;
+    }
+
+    public void setOntologySource(String ontologySource) {
+        this.ontologySource = ontologySource;
     }
 }

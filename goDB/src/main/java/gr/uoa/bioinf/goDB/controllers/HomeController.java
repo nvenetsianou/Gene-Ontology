@@ -24,31 +24,14 @@ public class HomeController {
     @Value("${spring.application.name}")
     String appName;
 
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
-    }
-
-    @GetMapping("/home")
-    public String geneSearch(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
-                             BindingResult result) {
-        if (searchObject.getTerm() != null) {
-            model.addAttribute("results", annotationDao.getBySymbolOrName(searchObject.getTerm()));
-        } else {
-            model.addAttribute("results", null);
-        }
-        return "home";
-    }
-
-    @GetMapping("/home")
-    public String goClassSearch(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
-                                BindingResult result) {
-        if (searchObject.getTerm() != null) {
-            model.addAttribute("results", annotationDao.getByAccessionOrDefinition(searchObject.getTerm()));
-        } else {
-            model.addAttribute("results", null);
-        }
-        return "home";
     }
 
     @GetMapping(value = "/username")

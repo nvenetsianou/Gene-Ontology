@@ -2,10 +2,12 @@ package gr.uoa.bioinf.goDB.daos;
 
 
 import gr.uoa.bioinf.goDB.models.Annotation;
+import gr.uoa.bioinf.goDB.models.SearchObject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 
@@ -27,9 +29,23 @@ public class AnnotationDao {
 
     // goclassaccession, definition,
     // ontology source
-    public List getByAccessionOrDefinition(String term) {
-        Query query =  entityManager.createQuery("select a from Annotation a where a.goClassAccession like :term or a.goClass.definition like :term");
-        query.setParameter("term", term);
+    public List searchGoClasses(SearchObject searchObject) {
+        searchObject.setTerm("%" + searchObject.getTerm() + "%");
+        String q = "select a from Annotation a where (a.goClassAccession like :term or a.goClass.definition like :term) ";
+        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
+            q += " and a.organism=:organism ";
+        }
+        Query query =  entityManager.createQuery(q);
+        query.setParameter("term", searchObject.getTerm());
+
+        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
+            query.setParameter("organism", searchObject.getOrganism());
+        }
+        return query.getResultList();
+    }
+
+    public List getOrganisms() {
+        Query query =  entityManager.createQuery("select distinct(a.organism) from Annotation a");
         return query.getResultList();
     }
 

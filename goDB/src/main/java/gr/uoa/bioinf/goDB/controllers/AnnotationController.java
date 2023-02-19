@@ -33,7 +33,7 @@ public class AnnotationController {
     public String goClassSearch(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
                          BindingResult result) {
         if (searchObject.getTerm() != null) {
-            model.addAttribute("results", annotationDao.getByAccessionOrDefinition(searchObject.getTerm()));
+          //  model.addAttribute("results", annotationDao.searchGoClasses(searchObject.getTerm()));
         } else {
             model.addAttribute("results", null);
         }
