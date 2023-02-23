@@ -20,10 +20,18 @@ public class AnnotationDao {
 
     // genesymbol, name
     // organism,
-    public List getBySymbolOrName(String term) {
-        term = "%" + term + "%";
-        Query query =  entityManager.createQuery("select a from Annotation a where a.geneSymbol like :term or a.geneGnprod.name like :term");
-        query.setParameter("term", term);
+    public List searchGenes(SearchObject searchObject) {
+        searchObject.setTerm("%" + searchObject.getTerm() + "%");
+        String q = "select a from Annotation a where (a.geneSymbol like :term or a.geneGnprod.name like :term)";
+        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
+            q += " and a.organism=:organism ";
+        }
+        Query query =  entityManager.createQuery(q);
+        query.setParameter("term", searchObject.getTerm());
+
+        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
+            query.setParameter("organism", searchObject.getOrganism());
+        }
         return query.getResultList();
     }
 
@@ -41,11 +49,27 @@ public class AnnotationDao {
         if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
             query.setParameter("organism", searchObject.getOrganism());
         }
+/*
+        if(!StringUtils.isEmpty(searchObject.getOntologySource()) && !"0".equals(searchObject.getOntologySource())) {
+            q += " and a.goClass.ontologySource=:goClass.ontologySource ";
+        }
+        Query query =  entityManager.createQuery(q);
+        query.setParameter("term", searchObject.getTerm());
+
+        if(!StringUtils.isEmpty(searchObject.getOntologySource()) && !"0".equals(searchObject.getOntologySource())) {
+            query.setParameter("ontologySource", searchObject.getOntologySource());
+        }
+*/
         return query.getResultList();
     }
 
     public List getOrganisms() {
         Query query =  entityManager.createQuery("select distinct(a.organism) from Annotation a");
+        return query.getResultList();
+    }
+
+    public List getOntologySources() {
+        Query query = entityManager.createQuery("select distinct(a.goClass.ontologySource) from Annotation a");
         return query.getResultList();
     }
 

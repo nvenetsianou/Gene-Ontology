@@ -16,13 +16,11 @@ public class AnnotationController {
     @Autowired
     AnnotationDao annotationDao;
 
-
-
     @GetMapping("/geneSearch")
     public String geneSearch(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
                          BindingResult result) {
         if (searchObject.getTerm() != null) {
-            model.addAttribute("results", annotationDao.getBySymbolOrName(searchObject.getTerm()));
+          //  model.addAttribute("results", annotationDao.searchGenes(searchObject.getTerm()));
         } else {
             model.addAttribute("results", null);
         }

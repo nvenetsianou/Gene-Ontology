@@ -31,11 +31,11 @@ public class SearchObject {
         this.goClass = goClass;
     }
 
-    public String getOntologySource() {
-        return ontologySource;
-    }
-
     public void setOntologySource(String ontologySource) {
         this.ontologySource = ontologySource;
+    }
+
+    public String getOntologySource() {
+        return ontologySource;
     }
 }

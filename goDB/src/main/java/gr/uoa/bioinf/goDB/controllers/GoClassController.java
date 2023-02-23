@@ -26,6 +26,12 @@ public class GoClassController {
     public String search(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
                                 BindingResult result) {
         model.addAttribute("organisms", annotationDao.getOrganisms());
+        model.addAttribute("ontologySources",annotationDao.getOntologySources());
+        if (searchObject.getTerm() != null) {
+            model.addAttribute("results", annotationDao.searchGoClasses(searchObject));
+        } else {
+            model.addAttribute("results", null);
+        }
         if (searchObject.getTerm() != null) {
             model.addAttribute("results", annotationDao.searchGoClasses(searchObject));
         } else {
