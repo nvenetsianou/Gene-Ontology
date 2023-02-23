@@ -73,6 +73,11 @@ public class AnnotationDao {
         return query.getResultList();
     }
 
+    public List getSynonyms() {
+        Query query = entityManager.createQuery("select distinct(a.geneGnprod.synonyms) from Annotation a");
+        return query.getResultList();
+    }
+
 
     ///
 
