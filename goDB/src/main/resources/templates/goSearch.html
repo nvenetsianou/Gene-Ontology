@@ -32,8 +32,7 @@
         <ul class="list-unstyled components">
             <li>
                 <a th:href="@{/}">Home</a>
-                <a th:href="@{/geneGnprod/search}">Gene Search</a>
-                <a th:href="@{/goClass/search}">GO Class Search</a>
+                <a th:href="@{/annotation/search}">GO Search</a>
             </li>
         </ul>
         </ul>
@@ -49,10 +48,13 @@
     </nav>
     <!-- Page Content Holder -->
     <div id="content">
-        <form th:action="@{/goClass/search}" th:object="${searchObject}" method="get">
+        <form th:action="@{/annotation/search}" th:object="${searchObject}" method="get">
             <div class="row m-b">
                 <div class="col-sm-3">
-                    Search by GO Class Accession OR Definition: <input id="filter" type="text" th:field="*{term}"
+                    Search by Gene Symbol OR Name: <input id="geneFilter" type="text" th:field="*{geneTerm}" class="form-control input-sm w-auto inline m-r"/>
+                </div>
+                <div class="col-sm-3">
+                    Search by GO Class Accession OR Definition: <input id="goClassFilter" type="text" th:field="*{goClassTerm}"
                                                                        class="form-control input-sm w-auto inline m-r"/>
                 </div>
                 <div class="col-sm-2">
@@ -74,9 +76,7 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="row m-b">
-                <div class="col-sm-6">
+                <div class="col-sm-1">
                     <button class="btn text-center searchButton">Search</button>
                 </div>
             </div>
@@ -86,26 +86,30 @@
         </div>
 
         <div th:switch="${results}" class="row">
-            <div class="col-12">
-                <h2 th:case="null">No GO classes</h2>
-                <div th:case="*">
-                    <h2>goClasses</h2>
-                    <table class="table  table-striped">
+            <h2 th:case="null"></h2>
+            <div th:case="*">
+                    <table class="table table-bordered table-striped" style="margin-top:30px;">
                         <thead>
                         <tr>
-                            <th>Accession</th>
+                            <th>Gene Symbol</th>
+                            <th>Name</th>
+                            <th>GO Class Accession</th>
                             <th>Definition</th>
-                            <th>Organism</th>
                             <th>Ontology Source</th>
+                            <th>Organism</th>
+                            <th>Gene Synonyms</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="result : ${results}">
+                            <td th:text="${result.geneSymbol}"></td>
+                            <td th:text="${result.geneGnprod.name}"></td>
                             <td th:text="${result.goClassAccession}"></td>
                             <td th:text="${result.goClass.definition}"></td>
-                            <td th:text="${result.organism}"></td>
                             <td th:text="${result.goClass.ontologySource}"></td>
+                            <td th:text="${result.organism}"></td>
+                            <td th:text="${result.geneGnprod.synonyms}" class="synonymsCol"></td>
                             <td>
                                 <i class="fa fa-pencil" aria-hidden="true" style="color:blue; font-size:20px;"></i>
                                 <i class="fa fa-trash" aria-hidden="true" style="color:red; font-size:20px;"  data-toggle="modal" data-target="#exampleModal"></i>
@@ -115,7 +119,6 @@
                     </table>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 

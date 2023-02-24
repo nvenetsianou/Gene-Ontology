@@ -222,3 +222,17 @@ a.article, a.article:hover {
     }
 
 }
+
+
+/*** custom **/
+
+.synonymsCol {
+    width: 20%;
+    word-break: break-all;
+}
+
+.searchButton {
+    background-color: #7386D5;
+    color: #ffffff;
+    margin-top: 22px;
+}

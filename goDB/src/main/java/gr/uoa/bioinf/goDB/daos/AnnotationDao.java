@@ -2,13 +2,18 @@ package gr.uoa.bioinf.goDB.daos;
 
 
 import gr.uoa.bioinf.goDB.models.Annotation;
+import gr.uoa.bioinf.goDB.models.GeneGnprod;
+import gr.uoa.bioinf.goDB.models.GoClass;
 import gr.uoa.bioinf.goDB.models.SearchObject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Repository;
 import org.thymeleaf.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -17,17 +22,74 @@ public class AnnotationDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public List search(SearchObject searchObject) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Annotation> cq = cb.createQuery(Annotation.class);
+        Root<Annotation> annotationRoot = cq.from(Annotation.class);
+        Join<Annotation, GoClass> annotationGoClass = null;
+        List<Predicate> orPredicates = new ArrayList<>();
+        List<Predicate> andPredicates = new ArrayList<>();
+        Predicate finalQuery;
+        cq.select(annotationRoot);
+
+        if(!StringUtils.isEmpty(searchObject.getGeneTerm())) {
+            String geneTerm = "%" + searchObject.getGeneTerm() + "%";
+            Join<Annotation, GeneGnprod> annotationGene = annotationRoot.join("geneGnprod");
+            orPredicates.add(cb.like(annotationRoot.get("geneSymbol"), geneTerm));
+            orPredicates.add(cb.like(annotationGene.get("name"), geneTerm));
+        }
+
+        if(!StringUtils.isEmpty(searchObject.getGoClassTerm())) {
+            String goClassTerm = "%" + searchObject.getGoClassTerm() + "%";
+            annotationGoClass = annotationRoot.join("goClass");
+            orPredicates.add(cb.like(annotationRoot.get("goClassAccession"), goClassTerm));
+            orPredicates.add(cb.like(annotationGoClass.get("definition"), goClassTerm ));
+        }
+
+        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
+            andPredicates.add(cb.equal(annotationRoot.get("organism"), searchObject.getOrganism()));
+        }
+
+        if(!StringUtils.isEmpty(searchObject.getOntologySource()) && !"0".equals(searchObject.getOntologySource())) {
+            if (annotationGoClass == null ) {
+                annotationGoClass = annotationRoot.join("goClass");
+            }
+            andPredicates.add(cb.equal(annotationGoClass.get("ontologySource"), searchObject.getOntologySource()));
+        }
+
+        Predicate orQueries = cb.or(orPredicates.toArray(new Predicate[0]));
+        Predicate andQueries = cb.and(andPredicates.toArray(new Predicate[0]));
+
+        if(orPredicates.isEmpty() && !andPredicates.isEmpty()) {
+            finalQuery = andQueries;
+            cq.where(finalQuery);
+        }
+        if(!orPredicates.isEmpty() && andPredicates.isEmpty()) {
+            finalQuery = orQueries;
+            cq.where(finalQuery);
+        }
+        if(!orPredicates.isEmpty() && !andPredicates.isEmpty()) {
+            finalQuery = cb.and(orQueries, andQueries);
+            cq.where(finalQuery);
+        }
+
+        TypedQuery<Annotation> typedQuery = entityManager.createQuery(cq);
+        List<Annotation> results = typedQuery.getResultList();
+        return results;
+    }
+
+    //////////// DELETE
 
     // genesymbol, name
     // organism,
     public List searchGenes(SearchObject searchObject) {
-        searchObject.setTerm("%" + searchObject.getTerm() + "%");
+        String term = "%" ;
         String q = "select a from Annotation a where (a.geneSymbol like :term or a.geneGnprod.name like :term)";
         if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
             q += " and a.organism=:organism ";
         }
         Query query =  entityManager.createQuery(q);
-        query.setParameter("term", searchObject.getTerm());
+        query.setParameter("term", term);
 
         if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
             query.setParameter("organism", searchObject.getOrganism());
@@ -38,28 +100,26 @@ public class AnnotationDao {
     // goclassaccession, definition,
     // ontology source
     public List searchGoClasses(SearchObject searchObject) {
-        searchObject.setTerm("%" + searchObject.getTerm() + "%");
+        String term = "%" ;
         String q = "select a from Annotation a where (a.goClassAccession like :term or a.goClass.definition like :term) ";
+        // build query according to the search parameters
         if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
             q += " and a.organism=:organism ";
         }
+        if(!StringUtils.isEmpty(searchObject.getOntologySource()) && !"0".equals(searchObject.getOntologySource())) {
+            q += " and a.goClass.ontologySource=:ontologySource ";
+        }
+
         Query query =  entityManager.createQuery(q);
-        query.setParameter("term", searchObject.getTerm());
+        query.setParameter("term", term);
 
         if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
             query.setParameter("organism", searchObject.getOrganism());
         }
-/*
-        if(!StringUtils.isEmpty(searchObject.getOntologySource()) && !"0".equals(searchObject.getOntologySource())) {
-            q += " and a.goClass.ontologySource=:goClass.ontologySource ";
-        }
-        Query query =  entityManager.createQuery(q);
-        query.setParameter("term", searchObject.getTerm());
-
         if(!StringUtils.isEmpty(searchObject.getOntologySource()) && !"0".equals(searchObject.getOntologySource())) {
             query.setParameter("ontologySource", searchObject.getOntologySource());
         }
-*/
+
         return query.getResultList();
     }
 

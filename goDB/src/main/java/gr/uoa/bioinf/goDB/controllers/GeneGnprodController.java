@@ -27,7 +27,7 @@ public class GeneGnprodController {
     public String search(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
                              BindingResult result) {
         model.addAttribute("organisms", annotationDao.getOrganisms());
-        if (searchObject.getTerm() != null) {
+        if (searchObject.getGeneTerm() != null) {
             model.addAttribute("results", annotationDao.searchGenes(searchObject));
         } else {
             model.addAttribute("results", null);

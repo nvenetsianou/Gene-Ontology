@@ -2,17 +2,26 @@ package gr.uoa.bioinf.goDB.models;
 
 public class SearchObject {
 
-    private String term;
+    private String geneTerm;
+    private String goClassTerm;
     private String organism;
     private String goClass;
     private String ontologySource;
 
-    public String getTerm() {
-        return term;
+    public String getGeneTerm() {
+        return geneTerm;
     }
 
-    public void setTerm(String term) {
-        this.term = term;
+    public void setGeneTerm(String geneTerm) {
+        this.geneTerm = geneTerm;
+    }
+
+    public String getGoClassTerm() {
+        return goClassTerm;
+    }
+
+    public void setGoClassTerm(String goClassTerm) {
+        this.goClassTerm = goClassTerm;
     }
 
     public String getOrganism() {

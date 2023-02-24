@@ -16,30 +16,18 @@ public class AnnotationController {
     @Autowired
     AnnotationDao annotationDao;
 
-    @GetMapping("/geneSearch")
-    public String geneSearch(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
                          BindingResult result) {
-        if (searchObject.getTerm() != null) {
-          //  model.addAttribute("results", annotationDao.searchGenes(searchObject.getTerm()));
+        model.addAttribute("organisms", annotationDao.getOrganisms());
+        model.addAttribute("ontologySources",annotationDao.getOntologySources());
+        if (searchObject.getGeneTerm() != null || searchObject.getGoClassTerm() != null) {
+            model.addAttribute("results", annotationDao.search(searchObject));
         } else {
             model.addAttribute("results", null);
         }
-        return "geneSearch";
+        return "goSearch";
     }
-
-    @GetMapping("/goClassSearch")
-    public String goClassSearch(Model model, @ModelAttribute("searchObject") SearchObject searchObject,
-                         BindingResult result) {
-        if (searchObject.getTerm() != null) {
-          //  model.addAttribute("results", annotationDao.searchGoClasses(searchObject.getTerm()));
-        } else {
-            model.addAttribute("results", null);
-        }
-        return "goClassSearch";
-    }
-
-
-    ///
 
     @GetMapping("/")
     @ResponseBody
