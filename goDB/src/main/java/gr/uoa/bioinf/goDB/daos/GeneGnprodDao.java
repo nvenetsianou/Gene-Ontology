@@ -4,6 +4,7 @@ import gr.uoa.bioinf.goDB.models.GoClass;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -13,6 +14,18 @@ public class GeneGnprodDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
+    public void persist(GeneGnprod geneGnprod) {
+        entityManager.persist(geneGnprod);
+    }
+
+    @Transactional
+    public void update(GeneGnprod geneGnprod) {
+        entityManager.merge(geneGnprod);
+    }
+
+
+    /////////////////////////////
     public List getAllGeneGnprod() {
         Query query = entityManager.createQuery("select gnpr from GeneGnprod gnpr");
         return query.getResultList();

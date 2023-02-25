@@ -10,6 +10,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.thymeleaf.util.StringUtils;
 
@@ -17,10 +19,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-// afti i klasi sindeetai me ti vasi
 public class AnnotationDao {
+
+    @Autowired
+    GeneGnprodDao geneGnprodDao;
+
+    @Autowired
+    GoClassDao goClassDao;
+
     @PersistenceContext
     private EntityManager entityManager;
+
+    public Annotation findByGeneSymbolAndGoClassAccession(String geneSymbol, String goClassAccession) {
+        Query query =  entityManager.createQuery("select a from Annotation a where a.geneSymbol=:geneSymbol and a.goClassAccession=:goClassAccession");
+        query.setParameter("geneSymbol", geneSymbol);
+        query.setParameter("goClassAccession", goClassAccession);
+        return (Annotation) query.getResultList().get(0);
+    }
 
     public List search(SearchObject searchObject) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -78,6 +93,36 @@ public class AnnotationDao {
         return results;
     }
 
+    @Transactional
+    public void persist(Annotation annotation) {
+        annotation.getGeneGnprod().setSymbol(annotation.getGeneSymbol());
+        annotation.getGeneGnprod().setOrganism(annotation.getOrganism());
+        annotation.getGoClass().setAccession(annotation.getGoClassAccession());
+
+        geneGnprodDao.persist(annotation.getGeneGnprod());
+        goClassDao.persist(annotation.getGoClass());
+        entityManager.persist(annotation);
+    }
+
+    @Transactional
+    public void update(Annotation annotation) {
+        annotation.getGeneGnprod().setSymbol(annotation.getGeneSymbol());
+        annotation.getGeneGnprod().setOrganism(annotation.getOrganism());
+        annotation.getGoClass().setAccession(annotation.getGoClassAccession());
+
+        geneGnprodDao.update(annotation.getGeneGnprod());
+        goClassDao.update(annotation.getGoClass());
+        entityManager.merge(annotation);
+    }
+
+    @Transactional
+    public void delete(Annotation annotation) {
+        entityManager.remove(annotation.getGeneGnprod());
+        entityManager.remove(annotation.getGoClass());
+        entityManager.remove(annotation);
+        entityManager.flush();
+    }
+
     //////////// DELETE
 
     // genesymbol, name
@@ -130,6 +175,11 @@ public class AnnotationDao {
 
     public List getOntologySources() {
         Query query = entityManager.createQuery("select distinct(a.goClass.ontologySource) from Annotation a");
+        return query.getResultList();
+    }
+
+    public List getEvidences() {
+        Query query = entityManager.createQuery("select distinct(a.evidence) from Annotation a");
         return query.getResultList();
     }
 

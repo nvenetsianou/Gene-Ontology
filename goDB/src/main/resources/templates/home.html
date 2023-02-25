@@ -27,12 +27,13 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Gene Ontology</h3>
+            <h3>GenOn</h3>
         </div>
         <ul class="list-unstyled components">
             <li>
                 <a th:href="@{/}">Home</a>
                 <a th:href="@{/annotation/search}">GO Search</a>
+                <a th:href="@{/annotation/add}">Add Annotation</a>
             </li>
         </ul>
         <br/>
@@ -47,22 +48,41 @@
     </nav>
     <!-- Page Content Holder -->
     <div id="content">
-        <h2>Welcome to Gene Ontology Web App</h2>
+        <h2>Welcome to GenOn Web App</h2>
         <p>
-            This a web app within the context of the course "Web & Bioinformatics Application Architecture".
+            This is a web app within the context of the course "Web & Bioinformatics Application Architecture".
         </p>
         <div>
-            <b>Gene Ontology </b> provides information on the function of genes, as it describes our knowledge of the
+            <b>GenOn </b> provides information on the function of genes, as it describes our knowledge of the
             biological domain with respect to three aspects:
             <div>
-                <li> Biological Process: operations or sets of molecular events with a defined beginning and end,
+                <li><b>Biological Process:</b> operations or sets of molecular events with a defined beginning and end,
                     pertinent to the functioning of integrated living units (cells, tissues, organs, and organisms).
                 </li>
-                <li> Molecular Function: the fundamental activities of a gene product at the molecular level, such as
+                <li><b>Molecular Function:</b> the fundamental activities of a gene product at the molecular level, such
+                    as
                     binding or catalysis.
                 </li>
-                <li>Cellular Components: the parts of a cell or its extracellular environment.</li>
+                <li><b>Cellular Components:</b> the parts of a cell or its extracellular environment.</li>
             </div>
+            <br/>
+            <div>
+                <h4>
+                    GO Search
+                </h4>
+                In this app you can search through GO Search field for Gene Ontology related information by using:
+                <li><b>Gene Symbol or Gene Name:</b> use a valid gene symbol or complete part of the name.</li>
+                <li><b>GO Class Accession or Definition:</b> use the Accession No or complete text to search though
+                    definition.
+                </li>
+                Moreover, you can specify your research by using the filers:
+                <li><b>Select Organism:</b> choose the organism of interest out of the <span th:text="${organisms}"></span> organisms provided.</li>
+                <li><b>Select Ontology Source:</b> choose the ontology source of interest (biological process, molecular
+                    function, cellular components).
+                </li>
+            </div>
+            <p>Below you can find ... plots (1. No of organisms: how many Genes & Go Classes,
+                2. ontology source: how many GO Classes in each ontology)</p>
         </div>
 
 

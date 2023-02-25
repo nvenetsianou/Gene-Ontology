@@ -25,7 +25,8 @@ public class HomeController {
     String appName;
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("organisms", annotationDao.getOrganisms().size());
         return "home";
     }
 

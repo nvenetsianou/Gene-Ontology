@@ -25,11 +25,11 @@ public class Annotation {
     private String reference;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "GO_class_Accession", referencedColumnName = "Accession")
+    @JoinColumn(name = "GO_class_Accession", referencedColumnName = "Accession", insertable = false, updatable = false)
     private GoClass goClass;
 
     @OneToOne
-    @JoinColumn(name = "Gene_Symbol", referencedColumnName = "Symbol")
+    @JoinColumn(name = "Gene_Symbol", referencedColumnName = "Symbol", insertable = false, updatable = false)
     private GeneGnprod geneGnprod;
 
     public Annotation() {

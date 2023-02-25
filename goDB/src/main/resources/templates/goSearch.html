@@ -21,7 +21,7 @@
     <!-- Sidebar Holder -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Gene Ontology</h3>
+            <h3>GenOn</h3>
         </div>
         <!--div sec:authorize="isAuthenticated()">
             This content is only shown to authenticated users.
@@ -33,6 +33,7 @@
             <li>
                 <a th:href="@{/}">Home</a>
                 <a th:href="@{/annotation/search}">GO Search</a>
+                <a th:href="@{/annotation/add}">Add Annotation</a>
             </li>
         </ul>
         </ul>
@@ -95,8 +96,8 @@
                             <th>Name</th>
                             <th>GO Class Accession</th>
                             <th>Definition</th>
-                            <th>Ontology Source</th>
                             <th>Organism</th>
+                            <th>Ontology Source</th>
                             <th>Gene Synonyms</th>
                             <th>Action</th>
                         </tr>
@@ -107,12 +108,12 @@
                             <td th:text="${result.geneGnprod.name}"></td>
                             <td th:text="${result.goClassAccession}"></td>
                             <td th:text="${result.goClass.definition}"></td>
-                            <td th:text="${result.goClass.ontologySource}"></td>
                             <td th:text="${result.organism}"></td>
+                            <td th:text="${result.goClass.ontologySource}"></td>
                             <td th:text="${result.geneGnprod.synonyms}" class="synonymsCol"></td>
                             <td>
                                 <i class="fa fa-pencil" aria-hidden="true" style="color:blue; font-size:20px;"></i>
-                                <i class="fa fa-trash" aria-hidden="true" style="color:red; font-size:20px;"  data-toggle="modal" data-target="#exampleModal"></i>
+                                <i class="fa fa-trash" aria-hidden="true" style="color:red; font-size:20px;" data-toggle="modal" th:attr="data-target=${'#editModal'+result.geneSymbol+result.goClassAccession}" data-row="${result}"></i>
                             </td>
                         </tr>
                         </tbody>
@@ -122,27 +123,24 @@
     </div>
 </div>
 
-
 <!-- Delete Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+    <div th:each="result : ${results}" th:attr="id=${'editModal' + result.geneSymbol + result.goClassAccession}" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-body">
+                        Are you sure you want to delete the annotation?
+                        <form action="#" th:action="@{/annotation/delete/}" th:object="${result}" method="get">
+                            <input type="text" hidden="true" th:field="${result.geneSymbol}">
+                            <input type="text" hidden="true" th:field="${result.goClassAccession}">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Remove</button>
+                    </div>
             </div>
         </div>
     </div>
-</div>
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -158,11 +156,19 @@
         crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
-        });
+    $("#delete").click(function(){
+        var model = $("#openmodal").attr("data-model");
+        var model = $("#openmodal").attr("data-model");
+        $.ajax({
+            url: '/annotation/delete',
+            data: {
+                display: $('#myInput').val(),
+            },
+            type: 'POST',
+            success: function(res) {
+                //$('#myModal').modal('hide');
+            }
+        })
     });
 </script>
 </body>
