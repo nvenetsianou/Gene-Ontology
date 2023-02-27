@@ -1,0 +1,20 @@
+UGT71K1	UDP-glycosyltransferase 71K1	Malus domestica	protein	UniProtKB	
+AMADH2	Aminoaldehyde dehydrogenase 2, peroxisomal	Malus domestica	protein	UniProtKB	
+CAS1	L-3-cyanoalanine synthase 1, mitochondrial	Malus domestica	protein	UniProtKB	
+CAS2	L-3-cyanoalanine synthase 2, mitochondrial	Malus domestica	protein	UniProtKB	
+P83336	Thaumatin-like protein 1b	Malus domestica	protein	UniProtKB	
+AMADH1	Aminoaldehyde dehydrogenase 1, peroxisomal	Malus domestica	protein	UniProtKB	
+AAT1-GSC	Alcohol acyl transferase 1 allele GSc	Malus domestica	protein	UniProtKB	DVH24_017674
+AAT1GSD	Alcohol acyl transferase 1 allele GSd	Malus domestica	protein	UniProtKB	DVH24_017667
+UGT75L17	Phloretin 4'-O-glucosyltransferase	Malus domestica	protein	UniProtKB	
+AAT1RGC	Alcohol acyl transferase 1 allele RGc	Malus domestica	protein	UniProtKB	DVH24_017673
+AAT1GSA	Alcohol acyl transferase 1 allele GSa	Malus domestica	protein	UniProtKB	DVH24_026095
+AAT1RGB	Alcohol acyl transferase 1 allele RGb	Malus domestica	protein	UniProtKB	
+AAT1RGA	Alcohol acyl transferase 1 allele RGa	Malus domestica	protein	UniProtKB	AAT1
+Q9ZPB7	Aldehyde dehydrogenase family 7 member A1	Malus domestica	protein	UniProtKB	
+UGT88F1	Phloretin 2'-O-glucosyltransferase	Malus domestica	protein	UniProtKB	
+UGT71A15	UDP-glycosyltransferase 71A15	Malus domestica	protein	UniProtKB	
+ACS-1	1-aminocyclopropane-1-carboxylate synthase	Malus domestica	protein	UniProtKB	
+AAT1GSB	Alcohol acyl transferase 1 allele GSb	Malus domestica	protein	UniProtKB	
+AAT2	Alcohol acyl transferase 2	Malus domestica	protein	UniProtKB	
+TL1	Thaumatin-like protein 1a	Malus domestica	protein	UniProtKB	TL

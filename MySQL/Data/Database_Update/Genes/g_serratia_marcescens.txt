@@ -1,0 +1,20 @@
+Hemolysin transporter protein ShlB	shlB	Serratia marcescens	protein	UniProtKB	
+Serralysin	P23694	Serratia marcescens	protein	UniProtKB	
+Beta-lactamase	classC beta-lactamase	Serratia marcescens	protein	UniProtKB	
+Pimeloyl-[acyl-carrier protein] methyl ester esterase	bioH	Serratia marcescens	protein	UniProtKB	
+Chitinase C1	chiC1	Serratia marcescens	protein	UniProtKB	
+Metallo-beta-lactamase type 2	P52699	Serratia marcescens	protein	UniProtKB	
+Phosphate-specific transport system accessory protein PhoU	phoU	Serratia marcescens	protein	UniProtKB	
+Chitin-binding type-4 domain-containing protein	cbp	Serratia marcescens	protein	UniProtKB	gbpA|AB868_00786|BVG97_15155|E4655_19940|FHU12_0647|FOT62_12335|HMI62_18715|NCTC10211_02621
+Prodigiosin synthesizing transferase PigC	pigC	Serratia marcescens	protein	UniProtKB	
+Thiamine diphosphate dependent-3-acetyloctanal synthase PigD	pigD	Serratia marcescens	protein	UniProtKB	
+Hemophore HasA	hasA	Serratia marcescens	protein	UniProtKB	
+Aminoglycoside N(6')-acetyltransferase type 1	Q54441	Serratia marcescens	protein	UniProtKB	
+Polyphosphate kinase	ppk	Serratia marcescens	protein	UniProtKB	
+Exopolyphosphatase	ppx	Serratia marcescens	protein	UniProtKB	
+Glyceraldehyde-3-phosphate dehydrogenase	gap	Serratia marcescens	protein	UniProtKB	
+Aminodeoxychorismate synthase component 2	pabA	Serratia marcescens	protein	UniProtKB	
+Aminoglycoside N(6')-acetyltransferase type 1	aacA4	Serratia marcescens	protein	UniProtKB	
+STN domain-containing protein	hasR	Serratia marcescens	protein	UniProtKB	
+Anthranilate synthase component 2	trpG	Serratia marcescens	protein	UniProtKB	
+Anthranilate synthase component 1	trpE	Serratia marcescens	protein	UniProtKB	

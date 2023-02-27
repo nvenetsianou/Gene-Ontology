@@ -1,0 +1,20 @@
+Cysteine and glycine-rich protein 1	N323_09087	Cathartes aura	protein	UniProtKB	
+Myoglobin	N323_02585	Cathartes aura	protein	UniProtKB	
+Aquaporin-5	N323_04470	Cathartes aura	protein	UniProtKB	
+Troponin C, slow skeletal and cardiac muscles	N323_03052	Cathartes aura	protein	UniProtKB	
+Vinculin	N323_01435	Cathartes aura	protein	UniProtKB	
+Eukaryotic translation initiation factor 2 subunit 1	N323_04971	Cathartes aura	protein	UniProtKB	
+Rhodopsin	N323_05932	Cathartes aura	protein	UniProtKB	
+Hepatocyte growth factor	N323_07433	Cathartes aura	protein	UniProtKB	
+Protein kinase C	N323_04117	Cathartes aura	protein	UniProtKB	
+G_PROTEIN_RECEP_F1_2 domain-containing protein	N323_07362	Cathartes aura	protein	UniProtKB	
+Neuronal acetylcholine receptor subunit alpha-7	N323_07748	Cathartes aura	protein	UniProtKB	
+Glypican-1	N323_05988	Cathartes aura	protein	UniProtKB	
+G_PROTEIN_RECEP_F1_2 domain-containing protein	N323_04639	Cathartes aura	protein	UniProtKB	
+High mobility group protein B2	N323_05408	Cathartes aura	protein	UniProtKB	
+Thyroglobulin type-1 domain-containing protein	N323_03036	Cathartes aura	protein	UniProtKB	
+c-SKI_SMAD_bind domain-containing protein	N323_10819	Cathartes aura	protein	UniProtKB	
+Glucagon	N323_06886	Cathartes aura	protein	UniProtKB	
+Phosphoinositide phospholipase C	N323_12200	Cathartes aura	protein	UniProtKB	
+Rhodopsin	N323_09515	Cathartes aura	protein	UniProtKB	
+Actin, aortic smooth muscle	N323_12707	Cathartes aura	protein	UniProtKB	
