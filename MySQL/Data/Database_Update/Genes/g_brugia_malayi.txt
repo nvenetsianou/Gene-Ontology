@@ -1,0 +1,20 @@
+Bm-CPL-3	Cathepsin L-like cysteine proteinase	Brugia malayi	protein	UniProtKB	
+Bm1_08695	Trehalose-phosphatase	Brugia malayi	protein	UniProtKB	
+bma-phy-2	Procollagen-proline 4-dioxygenase	Brugia malayi	protein	UniProtKB	bma-dpy-18|bma-dpy-18.1|phy-2|BM_Bm10824|Bm10824
+phy-1	Procollagen-proline 4-dioxygenase	Brugia malayi	protein	UniProtKB	Bm1_45455|Bma-phy-1|phy|BM_Bm3843|Bm3843
+Bm1_47965	Ribosome biogenesis protein WDR12 homolog	Brugia malayi	protein	UniProtKB	
+Bm2196	SHSP domain-containing protein	Brugia malayi	protein	UniProtKB	Bm1_45635|BM_Bm2195|BM_Bm2196|Bm2195
+bma-pdi-2	Protein disulfide-isomerase	Brugia malayi	protein	UniProtKB	pdi|BM_Bm13679|Bm13679
+JTB	Protein JTB	Brugia malayi	protein	UniProtKB	
+Bm1_53365	Probable spastin homolog Bm1_53365	Brugia malayi	protein	UniProtKB	
+Bm4678	Hexokinase	Brugia malayi	protein	UniProtKB	
+Bm1_53875	Bifunctional lysine-specific demethylase and histidyl-hydroxylase NO66	Brugia malayi	protein	UniProtKB	
+cpi-2	Cystatin cpi-2	Brugia malayi	protein	UniProtKB	
+Bm1_36105	Cytosolic Fe-S cluster assembly factor NUBP1 homolog	Brugia malayi	protein	UniProtKB	
+rps-23	40S ribosomal protein S23	Brugia malayi	protein	UniProtKB	
+cpi-1	Cystatin cpi-1	Brugia malayi	protein	UniProtKB	Bm1_20105
+CPL-6	Cathepsin L-like cysteine proteinase	Brugia malayi	protein	UniProtKB	Bm1_06175
+Bm1_25010	Probable cytosolic Fe-S cluster assembly factor Bm1_25010	Brugia malayi	protein	UniProtKB	
+far-1	Fatty-acid and retinol-binding protein 1	Brugia malayi	protein	UniProtKB	bm20
+ipgm-1	2,3-bisphosphoglycerate-independent phosphoglycerate mutase	Brugia malayi	protein	UniProtKB	
+HSP70	Heat shock 70 kDa protein	Brugia malayi	protein	UniProtKB	
