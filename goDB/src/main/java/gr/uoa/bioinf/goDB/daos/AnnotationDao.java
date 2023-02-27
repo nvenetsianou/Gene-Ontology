@@ -110,17 +110,24 @@ public class AnnotationDao {
         annotation.getGeneGnprod().setOrganism(annotation.getOrganism());
         annotation.getGoClass().setAccession(annotation.getGoClassAccession());
 
-        geneGnprodDao.update(annotation.getGeneGnprod());
-        goClassDao.update(annotation.getGoClass());
+       // geneGnprodDao.update(annotation.getGeneGnprod());
+     //   goClassDao.update(annotation.getGoClass());
         entityManager.merge(annotation);
     }
 
     @Transactional
     public void delete(Annotation annotation) {
-        entityManager.remove(annotation.getGeneGnprod());
-        entityManager.remove(annotation.getGoClass());
         entityManager.remove(annotation);
+        flushAndClear();
+        entityManager.remove(annotation.getGeneGnprod());
+        flushAndClear();
+        entityManager.remove(annotation.getGoClass());
+        flushAndClear();
+    }
+
+    void flushAndClear() {
         entityManager.flush();
+        entityManager.clear();
     }
 
     //////////// DELETE

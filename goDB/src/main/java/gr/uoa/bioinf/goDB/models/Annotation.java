@@ -24,11 +24,11 @@ public class Annotation {
     @Column(name="Reference")
     private String reference;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "GO_class_Accession", referencedColumnName = "Accession", insertable = false, updatable = false)
     private GoClass goClass;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "Gene_Symbol", referencedColumnName = "Symbol", insertable = false, updatable = false)
     private GeneGnprod geneGnprod;
 

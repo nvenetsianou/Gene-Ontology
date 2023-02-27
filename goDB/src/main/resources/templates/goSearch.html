@@ -52,10 +52,12 @@
         <form th:action="@{/annotation/search}" th:object="${searchObject}" method="get">
             <div class="row m-b">
                 <div class="col-sm-3">
-                    Search by Gene Symbol OR Name: <input id="geneFilter" type="text" th:field="*{geneTerm}" class="form-control input-sm w-auto inline m-r"/>
+                    Search by Gene Symbol OR Name: <input id="geneFilter" type="text" th:field="*{geneTerm}"
+                                                          class="form-control input-sm w-auto inline m-r"/>
                 </div>
                 <div class="col-sm-3">
-                    Search by GO Class Accession OR Definition: <input id="goClassFilter" type="text" th:field="*{goClassTerm}"
+                    Search by GO Class Accession OR Definition: <input id="goClassFilter" type="text"
+                                                                       th:field="*{goClassTerm}"
                                                                        class="form-control input-sm w-auto inline m-r"/>
                 </div>
                 <div class="col-sm-2">
@@ -86,61 +88,67 @@
             <button type="button" class="btn btn-primary text-right">Add GoClass</button>
         </div>
 
+        <div class="messages" th:if="${deleted != null}">
+            <div class="alert alert-success" role="alert" th:text="The annotation ${deleted.geneSymbol}-${deleted.goClassAccession} was deleted."></div>
+        </div>
+
         <div th:switch="${results}" class="row">
             <h2 th:case="null"></h2>
             <div th:case="*">
-                    <table class="table table-bordered table-striped" style="margin-top:30px;">
-                        <thead>
-                        <tr>
-                            <th>Gene Symbol</th>
-                            <th>Name</th>
-                            <th>GO Class Accession</th>
-                            <th>Definition</th>
-                            <th>Organism</th>
-                            <th>Ontology Source</th>
-                            <th>Gene Synonyms</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="result : ${results}">
-                            <td th:text="${result.geneSymbol}"></td>
-                            <td th:text="${result.geneGnprod.name}"></td>
-                            <td th:text="${result.goClassAccession}"></td>
-                            <td th:text="${result.goClass.definition}"></td>
-                            <td th:text="${result.organism}"></td>
-                            <td th:text="${result.goClass.ontologySource}"></td>
-                            <td th:text="${result.geneGnprod.synonyms}" class="synonymsCol"></td>
-                            <td>
-                                <i class="fa fa-pencil" aria-hidden="true" style="color:blue; font-size:20px;"></i>
-                                <i class="fa fa-trash" aria-hidden="true" style="color:red; font-size:20px;" data-toggle="modal" th:attr="data-target=${'#editModal'+result.geneSymbol+result.goClassAccession}" data-row="${result}"></i>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-bordered table-striped" style="margin-top:30px;">
+                    <thead>
+                    <tr>
+                        <th>Gene Symbol</th>
+                        <th>Name</th>
+                        <th>GO Class Accession</th>
+                        <th>Definition</th>
+                        <th>Organism</th>
+                        <th>Ontology Source</th>
+                        <th>Gene Synonyms</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="result : ${results}">
+                        <td th:text="${result.geneSymbol}"></td>
+                        <td th:text="${result.geneGnprod.name}"></td>
+                        <td th:text="${result.goClassAccession}"></td>
+                        <td th:text="${result.goClass.definition}"></td>
+                        <td th:text="${result.organism}"></td>
+                        <td th:text="${result.goClass.ontologySource}"></td>
+                        <td th:text="${result.geneGnprod.synonyms}" class="synonymsCol"></td>
+                        <td>
+                            <a th:href="@{/annotation/edit/__${result.geneSymbol}__/__${result.goClassAccession}__}"><i class="fa fa-pencil" aria-hidden="true" style="color:blue; font-size:20px;"></i></a>
+                            <i class="fa fa-trash" aria-hidden="true" style="color:red; font-size:20px;"
+                               data-toggle="modal"
+                               th:attr="data-target=${'#editModal'+result.geneSymbol+result.goClassAccession}"
+                               data-row="${result}"></i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
     </div>
 </div>
 
 <!-- Delete Modal -->
-    <div th:each="result : ${results}" th:attr="id=${'editModal' + result.geneSymbol + result.goClassAccession}" class="modal fade">
-        <div class="modal-dialog">
+<div th:each="result : ${results}" th:attr="id=${'editModal' + result.geneSymbol + result.goClassAccession}"
+     class="modal fade">
+    <div class="modal-dialog">
+        <form th:action="@{/annotation/delete/__${result.geneSymbol}__/__${result.goClassAccession}__}" method="get">
             <div class="modal-content">
-                    <div class="modal-body">
-                        Are you sure you want to delete the annotation?
-                        <form action="#" th:action="@{/annotation/delete/}" th:object="${result}" method="get">
-                            <input type="text" hidden="true" th:field="${result.geneSymbol}">
-                            <input type="text" hidden="true" th:field="${result.goClassAccession}">
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger" data-dismiss="modal">Remove</button>
-                    </div>
+                <div class="modal-body">
+                    Are you sure you want to delete the annotation?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
+</div>
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -156,7 +164,7 @@
         crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-    $("#delete").click(function(){
+    $("#delete").click(function () {
         var model = $("#openmodal").attr("data-model");
         var model = $("#openmodal").attr("data-model");
         $.ajax({
@@ -165,7 +173,7 @@
                 display: $('#myInput').val(),
             },
             type: 'POST',
-            success: function(res) {
+            success: function (res) {
                 //$('#myModal').modal('hide');
             }
         })
