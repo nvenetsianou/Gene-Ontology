@@ -1,6 +1,7 @@
 package gr.uoa.bioinf.goDB.controllers;
 
 import gr.uoa.bioinf.goDB.daos.AnnotationDao;
+import gr.uoa.bioinf.goDB.models.PieChartObj;
 import gr.uoa.bioinf.goDB.models.SearchObject;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -27,6 +29,8 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("organisms", annotationDao.getOrganisms().size());
+        model.addAttribute("genesGrouped", (List<PieChartObj>) annotationDao.getGenesGroupedByOrganism());
+        model.addAttribute("goclassesGrouped", (List<PieChartObj>) annotationDao.getGoClassesGroupedByOntologySource());
         return "home";
     }
 

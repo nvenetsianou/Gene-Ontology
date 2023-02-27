@@ -11,7 +11,6 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.thymeleaf.util.StringUtils;
 
@@ -20,12 +19,6 @@ import java.util.List;
 
 @Repository
 public class AnnotationDao {
-
-    @Autowired
-    GeneGnprodDao geneGnprodDao;
-
-    @Autowired
-    GoClassDao goClassDao;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -89,7 +82,7 @@ public class AnnotationDao {
         }
 
         TypedQuery<Annotation> typedQuery = entityManager.createQuery(cq);
-        List<Annotation> results = typedQuery.getResultList();
+        List<Annotation> results = typedQuery.setMaxResults(200).getResultList(); // instead of pagination
         return results;
     }
 
@@ -99,8 +92,8 @@ public class AnnotationDao {
         annotation.getGeneGnprod().setOrganism(annotation.getOrganism());
         annotation.getGoClass().setAccession(annotation.getGoClassAccession());
 
-        geneGnprodDao.persist(annotation.getGeneGnprod());
-        goClassDao.persist(annotation.getGoClass());
+        entityManager.persist(annotation.getGeneGnprod());
+        entityManager.persist(annotation.getGoClass());
         entityManager.persist(annotation);
     }
 
@@ -110,8 +103,6 @@ public class AnnotationDao {
         annotation.getGeneGnprod().setOrganism(annotation.getOrganism());
         annotation.getGoClass().setAccession(annotation.getGoClassAccession());
 
-       // geneGnprodDao.update(annotation.getGeneGnprod());
-     //   goClassDao.update(annotation.getGoClass());
         entityManager.merge(annotation);
     }
 
@@ -130,48 +121,13 @@ public class AnnotationDao {
         entityManager.clear();
     }
 
-    //////////// DELETE
-
-    // genesymbol, name
-    // organism,
-    public List searchGenes(SearchObject searchObject) {
-        String term = "%" ;
-        String q = "select a from Annotation a where (a.geneSymbol like :term or a.geneGnprod.name like :term)";
-        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
-            q += " and a.organism=:organism ";
-        }
-        Query query =  entityManager.createQuery(q);
-        query.setParameter("term", term);
-
-        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
-            query.setParameter("organism", searchObject.getOrganism());
-        }
+    public List getGenesGroupedByOrganism() {
+        Query query =  entityManager.createQuery("select g.organism, count(*) from GeneGnprod g group by g.organism");
         return query.getResultList();
     }
 
-    // goclassaccession, definition,
-    // ontology source
-    public List searchGoClasses(SearchObject searchObject) {
-        String term = "%" ;
-        String q = "select a from Annotation a where (a.goClassAccession like :term or a.goClass.definition like :term) ";
-        // build query according to the search parameters
-        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
-            q += " and a.organism=:organism ";
-        }
-        if(!StringUtils.isEmpty(searchObject.getOntologySource()) && !"0".equals(searchObject.getOntologySource())) {
-            q += " and a.goClass.ontologySource=:ontologySource ";
-        }
-
-        Query query =  entityManager.createQuery(q);
-        query.setParameter("term", term);
-
-        if(!StringUtils.isEmpty(searchObject.getOrganism()) && !"0".equals(searchObject.getOrganism())) {
-            query.setParameter("organism", searchObject.getOrganism());
-        }
-        if(!StringUtils.isEmpty(searchObject.getOntologySource()) && !"0".equals(searchObject.getOntologySource())) {
-            query.setParameter("ontologySource", searchObject.getOntologySource());
-        }
-
+    public List getGoClassesGroupedByOntologySource() {
+        Query query =  entityManager.createQuery("select g.ontologySource, count(*) from GoClass g group by g.ontologySource");
         return query.getResultList();
     }
 
@@ -192,73 +148,6 @@ public class AnnotationDao {
 
     public List getSynonyms() {
         Query query = entityManager.createQuery("select distinct(a.geneGnprod.synonyms) from Annotation a");
-        return query.getResultList();
-    }
-
-
-    ///
-
-    //getAllAnnotations, findAllAnnotations
-    //getOne, findone
-    public List getAllAnnotation() {
-        Query query = entityManager.createQuery("select a from Annotation a");
-        return query.getResultList();
-    }
-
-    public List getAnnotationByGeneSymbol(String geneSymbol) {
-        Query query =  entityManager.createQuery("select a from Annotation a where a.geneSymbol=:geneSymbol");
-        query.setParameter("geneSymbol", geneSymbol);
-        return query.getResultList();
-    }
-
-    public List getAnnotationByGoClassAccession(String goClassAccession) {
-        Query query =  entityManager.createQuery("select a from Annotation a where a.goClassAccession=:goClassAccession");
-        query.setParameter("goClassAccession", goClassAccession);
-        return query.getResultList();
-    }
-
-    public List findByOrganism(String organism) {
-        Query query =  entityManager.createQuery("select a from Annotation a where a.organism=:organism");
-        query.setParameter("organism", organism);
-        return query.getResultList();
-    }
-    // check this
-    public List findByOrganismAndSymbol(String organism, String symbol) {
-        Query query =  entityManager.createQuery("select a from Annotation a where " +
-                "a.organism=:organism and a.geneSymbol=:symbol");
-        query.setParameter("organism", organism);
-        query.setParameter("symbol", symbol);
-        return query.getResultList();
-    }
-    // check this
-    public List findByOrganismAndAccession(String organism, String accession) {
-        Query query =  entityManager.createQuery("select a from Annotation a where " +
-                "a.organism=:organism and a.goClassAccession=:goClassAccession");
-        query.setParameter("organism", organism);
-        query.setParameter("accession", accession);
-        return query.getResultList();
-    }
-    // tha einai typoy epilegw gene -> show annotation -> epilogh extension
-    public List findByAnnotationExtension(String annotationExtension) {
-        Query query =  entityManager.createQuery("select a from Annotation a where a.annotationExtension=:extension");
-        return query.getResultList();
-    }
-
-    public List findByAnnotationQualifier(String annotationQualifier) {
-        Query query =  entityManager.createQuery("select a from Annotation a where a.annotationQualifier=:annotationQualifier");
-        query.setParameter("annotationQualifier", annotationQualifier);
-        return query.getResultList();
-    }
-
-    public List findByEvidence(String evidence) {
-        Query query =  entityManager.createQuery("select a from Annotation a where a.evidence=:evidence");
-        query.setParameter("evidence", evidence);
-        return query.getResultList();
-    }
-
-    public  List findByReference(String reference) {
-        Query query =  entityManager.createQuery("select a from Annotation a where a.reference=:reference");
-        query.setParameter("reference",reference);
         return query.getResultList();
     }
 

@@ -33,18 +33,21 @@
             <li>
                 <a th:href="@{/}">Home</a>
                 <a th:href="@{/annotation/search}">GO Search</a>
-                <a th:href="@{/annotation/add}">Add Annotation</a>
+                <a th:href="@{/annotation/add}" sec:authorize="isAuthenticated()">Add Annotation</a>
             </li>
         </ul>
         <br/>
-        <div sec:authorize="isAuthenticated()">
+        <div sec:authorize="isAuthenticated()" style="margin-left:10px;">
+            <p style="color: white">Hello, <span sec:authentication="name"></span></p>
             <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
+                <input type="submit" value="Sign Out" class="btn btn-light text-center"/>
             </form>
         </div>
-        <form th:action="@{/login}" method="post">
-            <input type="submit" value="Login" class="btn btn-light text-center"/>
-        </form>
+        <div sec:authorize="!isAuthenticated()" style="margin-left:10px;">
+            <form th:action="@{/login}" method="post">
+                <input type="submit" value="Login" class="btn btn-light text-center"/>
+            </form>
+        </div>
     </nav>
     <!-- Page Content Holder -->
     <div id="content">
