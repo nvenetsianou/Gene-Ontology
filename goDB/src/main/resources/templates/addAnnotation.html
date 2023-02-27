@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title> Gene Ontology uoa_bioinf</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>GenOn</h3>
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/annotation/search}">GO Search</a>
+                <a th:href="@{/annotation/add}" sec:authorize="isAuthenticated()">Add Annotation</a>
+            </li>
+        </ul>
+        <br/>
+        <div sec:authorize="isAuthenticated()" style="margin-left:10px;">
+            <p style="color: white">Hello, <span sec:authentication="name"></span></p>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" class="btn btn-light text-center"/>
+            </form>
+        </div>
+        <div sec:authorize="!isAuthenticated()" style="margin-left:10px;">
+            <form th:action="@{/login}" method="post">
+                <input type="submit" value="Login" class="btn btn-light text-center"/>
+            </form>
+        </div>
+    </nav>
+    <!-- Page Content Holder -->
+    <div id="content">
+        <h2>Add new annotation</h2>
+        <form th:action="@{/annotation/persist}" th:object="${annotation}" method="post">
+            <div class="form-row">
+                <div class="col-4">
+                    <h4>Gene info</h4>
+                    <div class="col-12 form-group">
+                        <label>Symbol <span style="color:red;">*</span></label>
+                        <input type="text" class="form-control" th:field="*{geneSymbol}" th:required="required">
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Name <span style="color:red;">*</span></label>
+                        <input type="text" class="form-control" th:field="*{geneGnprod.name}" th:required="required">
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Organism <span style="color:red;">*</span></label>
+                        <select class="form-control" th:field="*{organism}" id="organism" th:required="required">
+                            <option th:each="organism : ${organisms}" th:value="${organism}"
+                                    th:text="${organism}"></option>
+                        </select>
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>gType <span style="color:red;">*</span></label>
+                        <input type="text" class="form-control" th:field="*{geneGnprod.gType}" th:required="required">
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Source</label>
+                        <input type="text" class="form-control" th:field="*{geneGnprod.source}">
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Synonyms</label>
+                        <input type="text" class="form-control" th:field="*{geneGnprod.synonyms}">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <h4>GoClass info</h4>
+                    <div class="col-12 form-group">
+                        <label>Accession <span style="color:red;">*</span></label>
+                        <input type="text" class="form-control" th:field="*{goClassAccession}" th:required="required">
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Definition <span style="color:red;">*</span></label>
+                        <textarea class="form-control" th:field="*{goClass.definition}" rows="3" th:required="required"></textarea>
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Ontology source <span style="color:red;">*</span></label>
+                        <select class="form-control" th:field="*{goClass.ontologySource}" id="ontologySource" th:required="required">
+                            <option th:each="ontologySource : ${ontologySources}" th:value="${ontologySource}"
+                                    th:text="${ontologySource}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <h4>Annotation info</h4>
+                    <div class="col-12 form-group">
+                        <label>Qualifier</label>
+                        <select class="form-control" th:field="*{annotationQualifier}" id="annotationQualifier">
+                            <option th:each="annotationQualifier : ${annotationQualifiers}"
+                                    th:value="${annotationQualifier}"
+                                    th:text="${annotationQualifier}"></option>
+                        </select>
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Extension</label>
+                        <input type="text" class="form-control" th:field="*{annotationExtension}">
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Evidence</label>
+                        <select class="form-control" th:field="*{evidence}" id="evidences">
+                            <option th:each="evidence : ${evidences}"
+                                    th:value="${evidence}"
+                                    th:text="${evidence}"></option>
+                        </select>
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Reference</label>
+                        <input type="text" class="form-control" th:field="*{reference}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-12 text-right">
+                    <button class="btn text-center searchButton">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+</script>
+</body>
+
+</html>
