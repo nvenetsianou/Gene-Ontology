@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a84a2107-8c12-4eaf-8990-58fff8bacda5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../MySQL/DB_scheme.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../MySQL/DB_scheme.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MySQL/load_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../MySQL/load_data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/controllers/AnnotationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/controllers/AnnotationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/controllers/HomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/controllers/HomeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/daos/AnnotationDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/daos/AnnotationDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/daos/GeneGnprodDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/daos/GeneGnprodDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/daos/GoClassDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gr/uoa/bioinf/goDB/daos/GoClassDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/addAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/addAnnotation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/goSearch.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/goSearch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,19 +88,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="goDB" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="goDB" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GoDbApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="goDB" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="gr.uoa.bioinf.goDB.GoDbApplication" />
@@ -123,6 +119,7 @@
       <workItem from="1677400567350" duration="411000" />
       <workItem from="1677401366566" duration="4824000" />
       <workItem from="1677514971970" duration="59000" />
+      <workItem from="1677528994650" duration="589000" />
     </task>
     <servers />
   </component>

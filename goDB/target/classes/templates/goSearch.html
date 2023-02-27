@@ -23,29 +23,26 @@
         <div class="sidebar-header">
             <h3>GenOn</h3>
         </div>
-        <!--div sec:authorize="isAuthenticated()">
-            This content is only shown to authenticated users.
-        </div>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form-->
         <ul class="list-unstyled components">
             <li>
                 <a th:href="@{/}">Home</a>
                 <a th:href="@{/annotation/search}">GO Search</a>
-                <a th:href="@{/annotation/add}">Add Annotation</a>
+                <a th:href="@{/annotation/add}" sec:authorize="isAuthenticated()">Add Annotation</a>
             </li>
         </ul>
         </ul>
         <br/>
-        <div sec:authorize="isAuthenticated()">
+        <div sec:authorize="isAuthenticated()" style="margin-left:10px;">
+            <p style="color: white">Hello, <span sec:authentication="name"></span></p>
             <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
+                <input type="submit" value="Sign Out" class="btn btn-light text-center"/>
             </form>
         </div>
-        <form th:action="@{/login}" method="post">
-            <input type="submit" value="Login" class="btn btn-light text-center"/>
-        </form>
+        <div sec:authorize="!isAuthenticated()" style="margin-left:10px;">
+            <form th:action="@{/login}" method="post">
+                <input type="submit" value="Login" class="btn btn-light text-center"/>
+            </form>
+        </div>
     </nav>
     <!-- Page Content Holder -->
     <div id="content">
@@ -84,9 +81,6 @@
                 </div>
             </div>
         </form>
-        <div sec:authorize="isAuthenticated()">
-            <button type="button" class="btn btn-primary text-right">Add GoClass</button>
-        </div>
 
         <div class="messages" th:if="${deleted != null}">
             <div class="alert alert-success" role="alert" th:text="The annotation ${deleted.geneSymbol}-${deleted.goClassAccession} was deleted."></div>
@@ -105,7 +99,7 @@
                         <th>Organism</th>
                         <th>Ontology Source</th>
                         <th>Gene Synonyms</th>
-                        <th>Action</th>
+                        <th sec:authorize="isAuthenticated()">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -117,7 +111,7 @@
                         <td th:text="${result.organism}"></td>
                         <td th:text="${result.goClass.ontologySource}"></td>
                         <td th:text="${result.geneGnprod.synonyms}" class="synonymsCol"></td>
-                        <td>
+                        <td sec:authorize="isAuthenticated()">
                             <a th:href="@{/annotation/edit/__${result.geneSymbol}__/__${result.goClassAccession}__}"><i class="fa fa-pencil" aria-hidden="true" style="color:blue; font-size:20px;"></i></a>
                             <i class="fa fa-trash" aria-hidden="true" style="color:red; font-size:20px;"
                                data-toggle="modal"

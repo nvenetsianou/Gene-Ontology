@@ -33,18 +33,21 @@
             <li>
                 <a th:href="@{/}">Home</a>
                 <a th:href="@{/annotation/search}">GO Search</a>
-                <a th:href="@{/annotation/add}">Add Annotation</a>
+                <a th:href="@{/annotation/add}" sec:authorize="isAuthenticated()">Add Annotation</a>
             </li>
         </ul>
         <br/>
-        <div sec:authorize="isAuthenticated()">
+        <div sec:authorize="isAuthenticated()" style="margin-left:10px;">
+            <p style="color: white">Hello, <span sec:authentication="name"></span></p>
             <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
+                <input type="submit" value="Sign Out" class="btn btn-light text-center"/>
             </form>
         </div>
-        <form th:action="@{/login}" method="post">
-            <input type="submit" value="Login" class="btn btn-light text-center"/>
-        </form>
+        <div sec:authorize="!isAuthenticated()" style="margin-left:10px;">
+            <form th:action="@{/login}" method="post">
+                <input type="submit" value="Login" class="btn btn-light text-center"/>
+            </form>
+        </div>
     </nav>
     <!-- Page Content Holder -->
     <div id="content">
@@ -82,23 +85,79 @@
                     function, cellular components).
                 </li>
             </div>
-            <p>Below you can find ... plots (1. No of organisms: how many Genes & Go Classes,
-                2. ontology source: how many GO Classes in each ontology)</p>
+            <br/>
+            <h4>Dynamic Plots</h4>
+            <div> Below you can find two plots:
+                <li><b>Genes per organisms:</b> how many genes exist in our database grouped by the number of organisms.</li>
+                <li><b>GO classes per ontology source:</b> how many GO classes belong in each category of the 3 ontology sources.</li>
+            </div>
         </div>
 
-        ..............................
-
-        <p>Spring Security Thymeleaf tutorial</p>
-        <div sec:authorize="hasRole('USER')">Text visible to user.</div>
-        <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
-        <div sec:authorize="isAuthenticated()">
-            Text visible only to authenticated users.
+        <div class="row" style=" margin-top:30px;">
+            <div class="col-6">
+                <div id="chartGenes" style="height: 370px; width: 100%;"></div>
+            </div>
+            <div class="col-6">
+                <div id="chartGoClass" style="height: 370px; width: 100%;"></div>
+            </div>
         </div>
-        Authenticated username:
-        <div sec:authentication="name"></div>
     </div>
-
 </div>
+
+
+<script th:inline="javascript">
+    window.onload = function() {
+        let genesGrouped = /*[[${genesGrouped}]]*/ {};
+        let goClassesGrouped = /*[[${goclassesGrouped}]]*/ {};
+
+        let dataPointsGenes = [];
+        for (d in genesGrouped) {
+            dataPointsGenes.push({
+                'label': genesGrouped[d][0],
+                'y': genesGrouped[d][1]
+            });
+        }
+        let dataPointsGoClasses = [];
+        for (d in goClassesGrouped) {
+            dataPointsGoClasses.push({
+                'label': goClassesGrouped[d][0],
+                'y': goClassesGrouped[d][1]
+            });
+        }
+
+        var optionsGenes = {
+            title: {
+                text: "Genes per organisms"
+            },
+            data: [{
+                type: "doughnut",
+                innerRadius: "40%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabel: "{label} ({y})",
+                yValueFormatString:"#,##0.#"%"",
+                dataPoints: dataPointsGenes
+            }]
+        };
+        $("#chartGenes").CanvasJSChart(optionsGenes);
+
+        var optionsGoClasses = {
+            title: {
+                text: "GO classes per ontology source"
+            },
+            data: [{
+                type: "doughnut",
+                innerRadius: "40%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabel: "{label} ({y})",
+                yValueFormatString:"#,##0.#"%"",
+                dataPoints: dataPointsGoClasses
+            }]
+        };
+        $("#chartGoClass").CanvasJSChart(optionsGoClasses);
+    }
+</script>
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -113,14 +172,9 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-    });
-</script>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
 </body>
 
 </html>
