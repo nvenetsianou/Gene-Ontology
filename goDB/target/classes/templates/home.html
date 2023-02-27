@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title> Gene Ontology uoa_bioinf</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>GenOn</h3>
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/annotation/search}">GO Search</a>
+                <a th:href="@{/annotation/add}">Add Annotation</a>
+            </li>
+        </ul>
+        <br/>
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+        <form th:action="@{/login}" method="post">
+            <input type="submit" value="Login" class="btn btn-light text-center"/>
+        </form>
+    </nav>
+    <!-- Page Content Holder -->
+    <div id="content">
+        <h2>Welcome to GenOn Web App</h2>
+        <p>
+            This is a web app within the context of the course "Web & Bioinformatics Application Architecture".
+        </p>
+        <div>
+            <b>GenOn </b> provides information on the function of genes, as it describes our knowledge of the
+            biological domain with respect to three aspects:
+            <div>
+                <li><b>Biological Process:</b> operations or sets of molecular events with a defined beginning and end,
+                    pertinent to the functioning of integrated living units (cells, tissues, organs, and organisms).
+                </li>
+                <li><b>Molecular Function:</b> the fundamental activities of a gene product at the molecular level, such
+                    as binding or catalysis.
+                </li>
+                <li><b>Cellular Components:</b> the parts of a cell or its extracellular environment.</li>
+            </div>
+            <br/>
+            <div>
+                <h4>
+                    GO Search
+                </h4>
+                In this app you can search through GO Search field for Gene Ontology related information by using:
+                <li><b>Gene Symbol or Gene Name:</b> use a valid gene symbol or complete part of the name.</li>
+                <li><b>GO Class Accession or Definition:</b> use the Accession No or complete text to search though
+                    definition.
+                </li>
+                Moreover, you can specify your research by using the filters:
+                <li><b>Select Organism:</b> choose the organism of interest out of the <span
+                        th:text="${organisms}"></span> organisms provided.
+                </li>
+                <li><b>Select Ontology Source:</b> choose the ontology source of interest (biological process, molecular
+                    function, cellular components).
+                </li>
+            </div>
+            <p>Below you can find ... plots (1. No of organisms: how many Genes & Go Classes,
+                2. ontology source: how many GO Classes in each ontology)</p>
+        </div>
+
+        ..............................
+
+        <p>Spring Security Thymeleaf tutorial</p>
+        <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+        <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+        <div sec:authorize="isAuthenticated()">
+            Text visible only to authenticated users.
+        </div>
+        Authenticated username:
+        <div sec:authentication="name"></div>
+    </div>
+
+</div>
+
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+</script>
+</body>
+
+</html>
