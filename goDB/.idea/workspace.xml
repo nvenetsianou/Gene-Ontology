@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a84a2107-8c12-4eaf-8990-58fff8bacda5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/controllers/AnnotationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/controllers/AnnotationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/daos/AnnotationDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/daos/AnnotationDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/models/Annotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/models/Annotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addAnnotation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editAnnotation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/goSearch.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/goSearch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2LTBOscx7AToTwdPu2bug0G4P6h" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/nefeli/Documents/GitHub/Gene-Ontelogy/goDB/src/main/resources/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;174f6774662cc914dc21768878d0b556&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="gr.uoa.bioinf.goDB" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="GoDbApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="goDB" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="gr.uoa.bioinf.goDB.GoDbApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a84a2107-8c12-4eaf-8990-58fff8bacda5" name="Changes" comment="" />
+      <created>1675885165676</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675885165676</updated>
+      <workItem from="1675885167613" duration="1314000" />
+      <workItem from="1676108629982" duration="10316000" />
+      <workItem from="1676224688182" duration="5101000" />
+      <workItem from="1676300888453" duration="925000" />
+      <workItem from="1676373063487" duration="1152000" />
+      <workItem from="1676712870767" duration="17388000" />
+      <workItem from="1676797856833" duration="5199000" />
+      <workItem from="1677174574708" duration="6250000" />
+      <workItem from="1677186291452" duration="107000" />
+      <workItem from="1677251953622" duration="967000" />
+      <workItem from="1677252986751" duration="12941000" />
+      <workItem from="1677327945685" duration="14997000" />
+      <workItem from="1677400567350" duration="411000" />
+      <workItem from="1677401366566" duration="4824000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/controllers/GoClassController.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/daos/GoClassDao.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/controllers/GoClassController.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/daos/AnnotationDao.java</url>
+          <line>157</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
