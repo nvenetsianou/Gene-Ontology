@@ -2,9 +2,10 @@ SELECT DATABASE();
 USE godb; 
 
 
-LOAD DATA INFILE './go_class_data.csv' INTO TABLE GO_class  
+LOAD DATA INFILE './go_class_data.csv' 
+IGNORE INTO TABLE GO_class  
 FIELDS TERMINATED BY '\t' ENCLOSED BY '"'
-IGNORE 1 LINES;
+IGNORE 1 LINES; 	
 
 LOAD DATA INFILE './genes_data.csv' INTO TABLE Gene_gnprod  
 FIELDS TERMINATED BY '\t' ENCLOSED BY '"'
@@ -14,3 +15,6 @@ IGNORE 1 LINES;
 LOAD DATA INFILE './unique_annotations_data.csv' INTO TABLE Annotations  
 FIELDS TERMINATED BY '\t' ENCLOSED BY '"'
 IGNORE 1 LINES;
+
+-- UPDATE DATABASE: add IGNORE before "INTO TABLE" 
+

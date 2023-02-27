@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a84a2107-8c12-4eaf-8990-58fff8bacda5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/controllers/AnnotationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/controllers/AnnotationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/daos/AnnotationDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/daos/AnnotationDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/models/Annotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/models/Annotation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addAnnotation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editAnnotation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editAnnotation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/goSearch.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/goSearch.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MySQL/DB_scheme.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../MySQL/DB_scheme.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MySQL/load_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../MySQL/load_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +79,19 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="goDB" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="goDB" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GoDbApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="goDB" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="gr.uoa.bioinf.goDB.GoDbApplication" />
@@ -113,6 +122,7 @@
       <workItem from="1677327945685" duration="14997000" />
       <workItem from="1677400567350" duration="411000" />
       <workItem from="1677401366566" duration="4824000" />
+      <workItem from="1677514971970" duration="59000" />
     </task>
     <servers />
   </component>
@@ -147,11 +157,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/controllers/GoClassController.java</url>
           <line>29</line>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/gr/uoa/bioinf/goDB/daos/AnnotationDao.java</url>
-          <line>157</line>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
