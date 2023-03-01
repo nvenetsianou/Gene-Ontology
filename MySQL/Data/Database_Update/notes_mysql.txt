@@ -1,9 +1,0 @@
-1. ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement
-For Ubuntu, edit the file /etc/mysql/mysql.conf.d/mysqld.cnf and add the following line at the end:
-secure_file_priv=""
-Then, Stop mysql service using systemctl stop mysql.
-Finally, Restart it using systemctl start mysql.
-
-2. Connect to mysql: sudo mysql -u root -p
-Password Nef + Password mysql
-
