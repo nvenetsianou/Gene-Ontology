@@ -1,7 +1,7 @@
 SELECT DATABASE(); 
 USE godb; 
 
-
+-- IF UPDATE DATABASE: add IGNORE before "INTO TABLE" 
 LOAD DATA INFILE './go_class_data.csv' 
 IGNORE INTO TABLE GO_class  
 FIELDS TERMINATED BY '\t' ENCLOSED BY '"'
@@ -12,9 +12,9 @@ FIELDS TERMINATED BY '\t' ENCLOSED BY '"'
 IGNORE 1 LINES;
 
 -- SET FOREIGN_KEY_CHECKS=1;
-LOAD DATA INFILE './unique_annotations_data.csv' INTO TABLE Annotations  
+LOAD DATA INFILE './annotations_data.csv' INTO TABLE Annotations  
 FIELDS TERMINATED BY '\t' ENCLOSED BY '"'
 IGNORE 1 LINES;
 
--- UPDATE DATABASE: add IGNORE before "INTO TABLE" 
+
 
